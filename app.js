@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,6 +9,11 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+/*
+    Local modules
+*/
+
+var todo = require('./api/todo/todo');
 
 
 /*
@@ -25,11 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
     Routes
 */
 
-app.get('/', function(req, res) {
-    res.json({
-        foo: 'bar'
-    });
-});
+app.get('/', todo.all);
+app.get('/:id', todo.one);
 
 
 
