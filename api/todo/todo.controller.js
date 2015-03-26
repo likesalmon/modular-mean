@@ -9,7 +9,7 @@ var all = function (callback) {
 
         // sort by modified date
         var sorted = _.sortBy(results, function (todo) {
-            return todo.modified
+            return todo.modified;
         });
 
         callback(null, sorted);
@@ -26,4 +26,4 @@ var one = function (id, callback) {
 module.exports = {
     all: all,
     one: one
-}
+};

@@ -10,13 +10,14 @@ describe('todo.model', function () {
                 if (err) return done(console.error(err));
 
                 expect(results).to.be.an(Array);
-                forEach(results, function (result) {
+                results.forEach(function (result) {
                     expect(result).to.have.property('id');
                     expect(result).to.have.property('title');
                     expect(result).to.have.property('description');
                     expect(result).to.have.property('created');
                     expect(result).to.have.property('modified');
                 });
+                done();
             });
         });
     });
@@ -32,6 +33,7 @@ describe('todo.model', function () {
                 expect(result).to.have.property('description');
                 expect(result).to.have.property('created');
                 expect(result).to.have.property('modified');
+                done();
             });
         });
     });
