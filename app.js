@@ -32,8 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
     Routes
 */
 
-app.get('/', todo.all);
-app.get('/:id', todo.one);
+app.get('/api', todo.all);
+app.get('/api/:id', todo.one);
 
 
 
