@@ -1,5 +1,6 @@
 {
     "strict": true,
+    "indent": 4,
     "node": true,
     "mocha": true,
     "globals": {
