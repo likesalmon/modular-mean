@@ -10,10 +10,10 @@ app.config(function($locationProvider, $stateProvider) {
     $locationProvider.html5Mode(true);
 
     $stateProvider
-        .state('home', {
+        .state('todo', {
             url: '/',
-            controller: require('./Login/home.ctrl.js').inject(app),
-            templateUrl: './home/home.html'
+            controller: require('./todo/todo.ctrl.js').inject(app),
+            templateUrl: './todo/todo.html'
         });
 
 });
