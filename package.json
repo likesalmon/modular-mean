@@ -1,7 +1,9 @@
 {
-  "name": "likesalmon-express-boilerplate",
-  "version": "0.0.0",
-  "private": true,
+  "name": "modular-mean",
+  "version": "0.0.1",
+  "main": "app.js",
+  "author": "Ammon Morris <likesalmon@gmail.com>",
+  "repository": "git@github.com:likesalmon/modular-mean.git",
   "scripts": {
     "start": "node ./bin/www"
   },
