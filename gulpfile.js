@@ -9,6 +9,7 @@ var watchify = require('watchify');
 var browserify = require('browserify');
 var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer')
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
 var nodeTestFiles = ['api/**/test/*.js'];
@@ -49,6 +50,7 @@ gulp.task('sass', function () {
         .pipe(sass({ onError: function (err) {
             console.error(err);
         }}))
+        .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
         .pipe(gulp.dest('public/css/'));
 });
 
