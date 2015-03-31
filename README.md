@@ -80,6 +80,10 @@ It should be very easy to tell files apart. The best way to do this to give them
 
 ## Thanks to these other great projects:
 
-Modular Mean borrows heavily from [Frickle](https://github.com/Hyra/Frickle).
+Gulp config and Browserify usage was inspired by [Frickle](https://github.com/Hyra/Frickle).
 
-It also integrates a many ideas about Browserify usage from Ben Lewis as found on the [QuickLeft](https://quickleft.com/blog/setting-up-a-clientside-javascript-project-with-gulp-and-browserify/) blog.
+These two blog posts by Ben Lewis of QuickLeft were integral in understanding testing with Browserify:
+* [Setting Up A JS App With Gulp and Browserify](https://quickleft.com/blog/setting-up-a-clientside-javascript-project-with-gulp-and-browserify/)
+* [AngularJS Unit Testing – For Real, Though](https://quickleft.com/blog/angularjs-unit-testing-for-real-though/)
+
+[This article](https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make) by Mark Meyer introduced me to the concept of modular front-end code. Then [this talk at ng-conf](https://www.youtube.com/watch?v=hG-ARy0oqjI) by John Papa about Angular style sealed the deal. The [angular-seed](https://github.com/angular/angular-seed) project has been an important resource in this regard as well.
