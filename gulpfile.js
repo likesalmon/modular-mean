@@ -9,7 +9,8 @@ var watchify = require('watchify');
 var browserify = require('browserify');
 var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer')
+var autoprefixer = require('gulp-autoprefixer');
+var karma = require('karma').server;
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
 var nodeTestFiles = ['api/**/test/*.js'];
@@ -22,9 +23,6 @@ gulp.task('mocha', function () {
         .pipe(mocha({reporter: 'nyan'}));
 });
 
-gulp.task('test', function () {
-    gulp.watch(nodeFilesToWatch, ['mocha']);
-});
 
 /*
     Client tasks
@@ -34,6 +32,14 @@ gulp.task('browserify', function() {
         entries: ['./client/main.js'],
         debug: true
     }).bundle().pipe(source('bundle.js'));
+    return bundleStream.pipe(gulp.dest('./public'));
+});
+
+gulp.task('testify', function() {
+    var bundleStream = browserify({
+        entries: ['./client/**/test/*.js'],
+        debug: true
+    }).bundle().pipe(source('test.bundle.js'));
     return bundleStream.pipe(gulp.dest('./public'));
 });
 
@@ -54,8 +60,23 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('public/css/'));
 });
 
+gulp.task('karma', function (done) {
+    karma.start({
+        configFile: __dirname + '/karma.conf.js'
+    }, done);
+});
+
+
+/*
+    Watchers
+*/
 gulp.task('watch', function () {
     gulp.watch('client/**/*.js', ['browserify']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
+});
+
+gulp.task('test', function () {
+    gulp.watch(nodeFilesToWatch, ['mocha']);
+    gulp.watch(['public/bundle.js'], ['karma']);
 });
