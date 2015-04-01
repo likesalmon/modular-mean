@@ -15,7 +15,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
-// var mochaPhantomjs = require('gulp-mocha-phantomjs');
+var mochaPhantomjs = require('gulp-mocha-phantomjs');
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
 var nodeTestFiles = ['api/**/test/*.js'];
@@ -56,29 +56,20 @@ gulp.task('browserify', function() {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'))
         .pipe(gulp.dest('./client/test'));
-    // var bundleStream = browserify({
-    //     entries: ['./client/main.js'],
-    //     debug: true
-    // }).bundle().pipe(source('bundle.js'));
-    // return bundleStream.pipe(gulp.dest('./public'));
 });
 
 gulp.task('browserify-tests', function() {
-    // var bundleStream = browserify({
-    //     entries: ['./client/todo/test/todo.ctrl.test.js'],
-    //     debug: true
-    // }).bundle().pipe(source('test.bundle.js'));
-    // return bundleStream.pipe(gulp.dest('./client/test/'));
-    var browserified = transform(function(filename) {
+    var bundle = transform(function(filename) {
         var b = browserify(filename);
         return b.bundle();
     });
 
-    // hello gulp.src() my old friend
-    return gulp.src(['./client/**/test/*.js'])
-        .pipe(browserified)
+    return gulp.src(['client/todo/test/*.js'])
+        .pipe(bundle)
+        // .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rename('test.bundle.js'))
-        .pipe(gulp.dest('./client/test'));
+        // .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('client/test'));
 });
 
 gulp.task('views', function () {
@@ -104,13 +95,18 @@ gulp.task('lint-client', function() {
         .pipe(jshint.reporter('default'));
 });
 
+gulp.task('test-client', function () {
+    gulp.src('client/test/index.html')
+        .pipe(mochaPhantomjs());
+});
+
 
 /*
     Watchers
 */
 gulp.task('watch', function () {
     gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
-    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify']);
+    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'browserify-tests', 'test-client']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
 });
