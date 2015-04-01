@@ -5,5 +5,15 @@
     "mocha": true,
     "globals": {
         "angular": true
-    }
+    },
+    "predef": [
+        "protractor",
+        "browser",
+        "by",
+        "element",
+        "it",
+        "describe",
+        "beforeEach",
+        "afterEach"
+    ]
 }
