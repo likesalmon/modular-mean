@@ -1,11 +1,20 @@
 {
-    "strict": true,
-    "indent": 4,
-    "node": true,
-    "mocha": true,
+    "camelcase": true,
+    "curly": false,
+    "eqeqeq": true,
+    "expr" : true,
+    "forin": true,
     "globals": {
         "angular": true
     },
+    "immed": true,
+    "indent": 4,
+    "latedef": "nofunc",
+    "mocha": true,
+    "newcap": false,
+    "noarg": true,
+    "node": true,
+    "nonbsp": true,
     "predef": [
         "protractor",
         "browser",
@@ -15,5 +24,10 @@
         "describe",
         "beforeEach",
         "afterEach"
-    ]
+    ],
+    "quotmark": "single",
+    "strict": true,
+    "trailing": true,
+    "undef": true,
+    "unused": "vars"
 }
