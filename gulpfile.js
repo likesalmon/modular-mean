@@ -3,11 +3,8 @@
 var gulp = require('gulp');
 // var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
-// var source = require('vinyl-source-stream');
-// var buffer = require('vinyl-buffer');
 var transform = require('vinyl-transform');
 var rename = require('gulp-rename');
-// var watchify = require('watchify');
 var browserify = require('browserify');
 var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
@@ -15,7 +12,6 @@ var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
-// var mochaPhantomjs = require('gulp-mocha-phantomjs');
 var karma = require('karma');
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
@@ -26,7 +22,7 @@ var nodeTestFiles = ['api/**/test/*.js'];
 */
 gulp.task('mocha', function () {
     return gulp.src(nodeTestFiles, {read: false})
-        .pipe(mocha({reporter: 'nyan'}));
+        .pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('lint-api', function() {
@@ -59,20 +55,6 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./client/test'));
 });
 
-gulp.task('browserify-tests', function() {
-    var bundle = transform(function(filename) {
-        var b = browserify(filename);
-        return b.bundle();
-    });
-
-    return gulp.src(['client/todo/test/*.js'])
-        .pipe(bundle)
-        // .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(rename('test.bundle.js'))
-        // .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('client/test'));
-});
-
 gulp.task('views', function () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
@@ -96,12 +78,6 @@ gulp.task('lint-client', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('karma', function() {
-    return karma.server.start({
-        configFile: __dirname + '/karma.conf.js'
-    });
-});
-
 
 /*
     Watchers
@@ -115,4 +91,7 @@ gulp.task('watch', function () {
 
 gulp.task('test', function () {
     gulp.watch(nodeFilesToWatch, ['mocha']);
+    karma.server.start({
+        configFile: __dirname + '/karma.conf.js'
+    });
 });
