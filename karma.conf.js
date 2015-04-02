@@ -12,14 +12,22 @@ module.exports = function(config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'sinon-chai'],
+        frameworks: ['mocha', 'chai', 'sinon-chai', 'browserify'],
+
+        plugins : [
+            'karma-mocha',
+            'karma-browserify',
+            'karma-jasmine',
+            'karma-phantomjs-launcher',
+            'karma-coverage',
+            'karma-chai',
+            'karma-sinon-chai'
+        ],
 
 
         // list of files / patterns to load in the browser
         files: [
-            'public/bundle.js',
-            'node_modules/angular-mocks/angular-mocks.js',
-            'client/test.bundle.js'
+            'client/**/test/*.spec.js',
         ],
 
 
@@ -29,15 +37,19 @@ module.exports = function(config) {
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        // preprocessors: {
-        //     'client/Login/*.js': ['coverage']
-        // },
+        preprocessors: {
+            'client/**/test/*.spec.js': ['coverage', 'browserify']
+        },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['progress', 'spec'],
 
+        browserify: {
+            debug: true,
+            transform: ['browserify-istanbul']
+        },
 
         // web server port
         port: 9876,
