@@ -15,7 +15,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
-var mochaPhantomjs = require('gulp-mocha-phantomjs');
+// var mochaPhantomjs = require('gulp-mocha-phantomjs');
+var karma = require('karma');
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
 var nodeTestFiles = ['api/**/test/*.js'];
@@ -95,9 +96,10 @@ gulp.task('lint-client', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test-client', function () {
-    gulp.src('client/test/index.html')
-        .pipe(mochaPhantomjs());
+gulp.task('karma', function() {
+    return karma.server.start({
+        configFile: __dirname + '/karma.conf.js'
+    });
 });
 
 
