@@ -35,7 +35,6 @@ describe('todo.controller', function () {
                 expect(result).to.have.property('description');
                 expect(result).to.have.property('created');
                 expect(result).to.have.property('modified');
-
                 done();
             });
         });
