@@ -1,14 +1,14 @@
 'use strict';
 
-describe('angularjs homepage todo list', function() {
-    it('should add a todo', function() {
-    browser.get('http://www.angularjs.org');
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+var expect = require('chai').expect;
 
-    element(by.model('todoText')).sendKeys('write a protractor test');
-    element(by.css('[value="add"]')).click();
-
-    var todoList = element.all(by.repeater('todo in todos'));
-        expect(todoList.count()).toEqual(3);
-        expect(todoList.get(2).getText()).toEqual('write a protractor test');
+describe('todo', function() {
+    it('should have a binding to foo', function() {
+        browser.get('http://127.0.0.1:3000');
+        var foo = element(by.binding('foo'));
+        expect(foo.getText()).to.eventually.equal('bar');
     });
 });
