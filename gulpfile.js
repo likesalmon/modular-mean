@@ -13,6 +13,10 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
 var karma = require('karma');
+var protractor = require('gulp-protractor').protractor;
+var webdriver = require('gulp-protractor').webdriver;
+// var webdriver_standalone = webdriver.webdriver_standalone;
+var webdriverUpdate = require('gulp-protractor').webdriver_update;
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
 var nodeTestFiles = ['api/**/test/*.js'];
@@ -48,7 +52,7 @@ gulp.task('browserify', function() {
     return gulp.src(['./client/main.js'])
         .pipe(bundle)
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(rename('bundle.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'))
@@ -78,13 +82,36 @@ gulp.task('lint-client', function() {
         .pipe(jshint.reporter('default'));
 });
 
+gulp.task('webdriver-update', webdriverUpdate);
+gulp.task('webdriver', webdriver);
+
+// gulp.task('webdriver_standalone', webdriver_standalone);
+
+gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
+
+    return gulp.src('client/**/test/*.e2e.js')
+        .pipe(protractor({
+            configFile: './protractor.conf.js',
+            args: ['--baseUrl', 'http://127.0.0.1:3000']
+        }))
+        .on('error', function(err) {
+            // Make sure failed tests cause gulp to exit non-zero
+            throw err;
+        });
+
+});
+
+
+
+
+
 
 /*
     Watchers
 */
 gulp.task('watch', function () {
     gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
-    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'browserify-tests', 'test-client']);
+    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
 });
