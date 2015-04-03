@@ -10,7 +10,7 @@ var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
+// var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
 var karma = require('karma');
 var protractor = require('gulp-protractor').protractor;
@@ -110,7 +110,7 @@ gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
 */
 gulp.task('watch', function () {
     gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
-    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify']);
+    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'protractor']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
 });
