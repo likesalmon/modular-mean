@@ -55,8 +55,7 @@ gulp.task('browserify', function() {
         // .pipe(uglify())
         .pipe(rename('bundle.js'))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./public'))
-        .pipe(gulp.dest('./client/test'));
+        .pipe(gulp.dest('./public'));
 });
 
 gulp.task('views', function () {
