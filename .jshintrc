@@ -1,5 +1,5 @@
 {
-    "camelcase": true,
+    "camelcase": false,
     "curly": false,
     "eqeqeq": true,
     "expr" : true,
@@ -16,7 +16,6 @@
     "node": true,
     "nonbsp": true,
     "predef": [
-        "protractor",
         "browser",
         "by",
         "element",
