@@ -87,7 +87,6 @@ gulp.task('webdriver', webdriver);
 // gulp.task('webdriver_standalone', webdriver_standalone);
 
 gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
-
     return gulp.src('client/**/test/*.e2e.js')
         .pipe(protractor({
             configFile: './protractor.conf.js',
