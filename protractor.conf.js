@@ -6,13 +6,15 @@ exports.config = {
 
     baseUrl: 'http://localhost:3000/',
 
+    rootElement: 'body',
+
     capabilities: {
         browserName: 'chrome',
         version: '',
         platform: 'ANY'
     },
 
-    framework: 'jasmine',
+    framework: 'mocha',
 
     jasmineNodeOpts: {
         isVerbose: false,
