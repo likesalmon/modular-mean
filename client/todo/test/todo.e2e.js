@@ -1,14 +1,16 @@
 'use strict';
 
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-var expect = require('chai').expect;
+var helper = require('../../helpers/test.helper.js');
+var expect = helper.expect;
+var ToDoPage = require('./todo.page');
 
-describe('todo', function() {
+describe('todo page', function() {
+    beforeEach(function () {
+        this.page = new ToDoPage();
+        this.page.get();
+    });
+
     it('should have a binding to foo', function() {
-        browser.get('http://127.0.0.1:3000');
-        var foo = element(by.binding('foo'));
-        expect(foo.getText()).to.eventually.equal('bar');
+        expect(this.page.foo.getText()).to.eventually.equal('bar');
     });
 });
