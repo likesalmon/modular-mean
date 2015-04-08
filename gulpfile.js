@@ -105,15 +105,13 @@ gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
 /*
     Watchers
 */
-gulp.task('watch', function () {
+gulp.task('dev', function () {
     gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
+    gulp.watch(nodeFilesToWatch, ['mocha']);
     gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'protractor']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
-});
 
-gulp.task('test', function () {
-    gulp.watch(nodeFilesToWatch, ['mocha']);
     karma.server.start({
         configFile: __dirname + '/karma.conf.js'
     });
