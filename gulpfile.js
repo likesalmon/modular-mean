@@ -59,6 +59,12 @@ gulp.task('views', function () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
 
+    gulp.src('client/login/*.html')
+        .pipe(gulp.dest('public/login/'));
+
+    gulp.src('client/dashboard/*.html')
+        .pipe(gulp.dest('public/dashboard/'));
+
     gulp.src('client/todo/*.html')
         .pipe(gulp.dest('public/todo/'));
 });
