@@ -10,13 +10,14 @@ var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
-// var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify');
 // var minifyCSS = require('gulp-minify-css');
 var karma = require('karma');
 var protractor = require('gulp-protractor').protractor;
 var webdriver = require('gulp-protractor').webdriver;
 // var webdriver_standalone = webdriver.webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
+// var ngAnnotate = require('gulp-ng-annotate');
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
 var nodeTestFiles = ['api/**/test/*.js'];
@@ -51,8 +52,9 @@ gulp.task('browserify', function() {
 
     return gulp.src(['./client/main.js'])
         .pipe(bundle)
+        // .pipe(ngAnnotate())
+        .pipe(uglify())
         .pipe(sourcemaps.init({loadMaps: true}))
-        // .pipe(uglify())
         .pipe(rename('bundle.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'));
