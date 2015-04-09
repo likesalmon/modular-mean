@@ -5,8 +5,7 @@ require('angular');
 var uiRoute = require('angular-ui-router');
 var app = angular.module('MyApp', [uiRoute]);
 
-app.config(function($locationProvider, $stateProvider) {
-
+app.config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider) {
     $locationProvider.html5Mode(true);
 
     $stateProvider
@@ -15,7 +14,6 @@ app.config(function($locationProvider, $stateProvider) {
             controller: require('./todo/todo.ctrl.js').inject(app),
             templateUrl: './todo/todo.html'
         });
-
-});
+}]);
 
 app.run();

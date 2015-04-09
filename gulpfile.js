@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-// var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var transform = require('vinyl-transform');
 var rename = require('gulp-rename');
@@ -10,12 +9,10 @@ var mocha = require('gulp-mocha');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
-// var uglify = require('gulp-uglify');
-// var minifyCSS = require('gulp-minify-css');
+var uglify = require('gulp-uglify');
 var karma = require('karma');
 var protractor = require('gulp-protractor').protractor;
 var webdriver = require('gulp-protractor').webdriver;
-// var webdriver_standalone = webdriver.webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
@@ -51,8 +48,8 @@ gulp.task('browserify', function() {
 
     return gulp.src(['./client/main.js'])
         .pipe(bundle)
+        .pipe(uglify())
         .pipe(sourcemaps.init({loadMaps: true}))
-        // .pipe(uglify())
         .pipe(rename('bundle.js'))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'));
@@ -83,8 +80,6 @@ gulp.task('lint-client', function() {
 
 gulp.task('webdriver-update', webdriverUpdate);
 gulp.task('webdriver', webdriver);
-
-// gulp.task('webdriver_standalone', webdriver_standalone);
 
 gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
     return gulp.src('client/**/test/*.e2e.js')

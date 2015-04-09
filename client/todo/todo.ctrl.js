@@ -5,6 +5,6 @@ exports.inject = function(app) {
     return exports.controller;
 };
 
-exports.controller = function ($scope) {
+exports.controller = ['$scope', function ($scope) {
     $scope.foo = 'bar';
-};
+}];
