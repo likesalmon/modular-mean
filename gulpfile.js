@@ -59,14 +59,14 @@ gulp.task('views', function () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
 
-    gulp.src('client/login/*.html')
-        .pipe(gulp.dest('public/login/'));
+    gulp.src('client/Login/*.html')
+        .pipe(gulp.dest('public/Login/'));
 
-    gulp.src('client/dashboard/*.html')
-        .pipe(gulp.dest('public/dashboard/'));
+    gulp.src('client/Dashboard/*.html')
+        .pipe(gulp.dest('public/Dashboard/'));
 
-    gulp.src('client/todo/*.html')
-        .pipe(gulp.dest('public/todo/'));
+    gulp.src('client/Todo/*.html')
+        .pipe(gulp.dest('public/Todo/'));
 });
 
 gulp.task('sass', function () {
