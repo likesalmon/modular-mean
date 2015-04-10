@@ -4,7 +4,7 @@ var helper = require('../../helpers/test.helper.js');
 
 function ToDoPage () {
     this.get = function() {
-        browser.get(helper.rootUrl + '/todo');
+        browser.get(helper.rootUrl + '/toDo');
     };
 
     this.foo = element(by.binding('foo'));
