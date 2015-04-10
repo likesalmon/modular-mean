@@ -1,6 +1,6 @@
 'use strict';
 
-var controller = require('./toDo.controller.js');
+var controller = require('./todo.controller.js');
 
 var all = function (req, res, next) {
     controller.all(function (err, results) {
