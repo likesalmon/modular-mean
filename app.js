@@ -24,15 +24,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 
 /*
     Routes
 */
-app.get('/api', todo.all);
-app.get('/api/:id', todo.one);
+app.get('/*.html', express.static(__dirname + '/public'));
+app.get('/bundle.js', express.static(__dirname + '/public'));
+app.use('/css', express.static(__dirname + '/public/css'));
+
+app.all('/*', function(req, res, next) {
+    res.sendFile('index.html', { root: __dirname + '/public' });
+});
 
 
 
