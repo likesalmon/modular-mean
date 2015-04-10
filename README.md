@@ -17,11 +17,11 @@ A boilerplate for MEAN stack projects that uses a modular style to encapsulate r
 
 The basic idea is to mirror the directory structure in the front-end and the backend.
 
-The api/ directory holds the Node/Express backend. API routes and initialization are handled by the app.js file in the root directory. Each subdirectory of api/ is named using camelCase.
+The api/ directory holds the Node/Express backend. API routes and initialization are handled by the app.js file in the root directory. Each subdirectory of api/ is named using SnakeCase.
 
 The client/ directory holds the AngularJS code. Notice how similar it is to api/? There is also a test/build/ directory nested in client/: this is where Gulp places test files after processing with Browserify so they can be read by Karma.
 
-The public/ directory is where Gulp places the AngularJS code from client/ after it's been processed. The nested camelCase-named folders in public/ only contain view.html files. All .js files are combined into a single file called bundle.js that lives in the root of public/.
+The public/ directory is where Gulp places the AngularJS code from client/ after it's been processed. The nested SnakeCase-named folders in public/ only contain view.html files. All .js files are combined into a single file called bundle.js that lives in the root of public/.
 
 ```
 modular-mean
@@ -37,8 +37,7 @@ modular-mean
         |- test
     |- sass
     |- images
-    |- test
-        |- build
+    |- helpers
 |- public
     |- css
     |- js
@@ -54,7 +53,7 @@ Consistency and legibility is the goal here.
 
 ### Directory naming conventions
 
-* Modules should be named in camelCase.
+* Modules should be named in SnakeCase.
 
 ### File naming conventions
 
@@ -62,14 +61,14 @@ It should be very easy to tell files apart. The best way to do this to give them
 
 * Node file names should reflect the module they belong to and their place in the MVC structure:
 
-        myModule/
+        MyModule/
         |- myModule.js
         |- myModule.controller.js
         |- myModule.model.js
 
 * Angular script file names should reveal their use in four-letter abbreviations:
 
-        myModule/
+        MyModule/
         |- myModule.ctrl.js
         |- myModule.srvc.js
         |- myModule.drct.js
@@ -87,3 +86,5 @@ These two blog posts by Ben Lewis of QuickLeft were integral in understanding te
 * [AngularJS Unit Testing – For Real, Though](https://quickleft.com/blog/angularjs-unit-testing-for-real-though/)
 
 [This article](https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make) by Mark Meyer introduced me to the concept of modular front-end code. Then [this talk at ng-conf](https://www.youtube.com/watch?v=hG-ARy0oqjI) by John Papa about Angular style sealed the deal. The [angular-seed](https://github.com/angular/angular-seed) project has been an important resource in this regard as well.
+
+This article inspired the [client-side authentication](http://arthur.gonigberg.com/2013/06/29/angularjs-role-based-auth/) I'm using.
