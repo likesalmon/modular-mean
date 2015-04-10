@@ -97,6 +97,12 @@ gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
         });
 });
 
+gulp.task('karma', function () {
+    karma.server.start({
+        configFile: __dirname + '/karma.conf.js'
+    });
+});
+
 
 
 /*
