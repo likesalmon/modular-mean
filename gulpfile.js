@@ -65,8 +65,8 @@ gulp.task('views', function () {
     gulp.src('client/Dashboard/*.html')
         .pipe(gulp.dest('public/Dashboard/'));
 
-    gulp.src('client/Todo/*.html')
-        .pipe(gulp.dest('public/Todo/'));
+    gulp.src('client/ToDo/*.html')
+        .pipe(gulp.dest('public/ToDo/'));
 });
 
 gulp.task('sass', function () {

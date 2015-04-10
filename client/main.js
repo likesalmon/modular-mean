@@ -22,8 +22,8 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
         })
         .state('todo', {
             url: '/todo',
-            controller: require('./Todo/todo.ctrl.js').inject(app),
-            templateUrl: './Todo/todo.html'
+            controller: require('./ToDo/toDo.ctrl.js').inject(app),
+            templateUrl: './ToDo/toDo.html'
         });
 
         $urlRouterProvider.otherwise('/');

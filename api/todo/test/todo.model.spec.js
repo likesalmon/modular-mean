@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('expect.js');
-var ToDo = require('../todo.model.js');
+var ToDo = require('../toDo.model.js');
 
 describe('todo.model', function () {
     describe('findAll', function () {
