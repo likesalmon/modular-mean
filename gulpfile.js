@@ -48,7 +48,7 @@ gulp.task('browserify', function() {
 
     return gulp.src(['./client/main.js'])
         .pipe(bundle)
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rename('bundle.js'))
         .pipe(sourcemaps.write('./'))
