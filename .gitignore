@@ -4,5 +4,6 @@
 *.sublime-project
 *.sublime-workspace
 node_modules
-public
+public/*
+!public/.gitignore
 npm-debug.log
