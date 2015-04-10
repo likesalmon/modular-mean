@@ -12,18 +12,18 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
     $stateProvider
         .state('dashboard', {
             url: '/',
-            controller: require('./dashboard/dashboard.ctrl.js').inject(app),
-            templateUrl: './dashboard/dashboard.html'
+            controller: require('./Dashboard/dashboard.ctrl.js').inject(app),
+            templateUrl: './Dashboard/dashboard.html'
         })
         .state('login', {
             url: '/login',
-            controller: require('./login/login.ctrl.js').inject(app),
-            templateUrl: './login/login.html'
+            controller: require('./Login/login.ctrl.js').inject(app),
+            templateUrl: './Login/login.html'
         })
         .state('todo', {
             url: '/todo',
-            controller: require('./todo/todo.ctrl.js').inject(app),
-            templateUrl: './todo/todo.html'
+            controller: require('./Todo/todo.ctrl.js').inject(app),
+            templateUrl: './Todo/todo.html'
         });
 
         $urlRouterProvider.otherwise('/');
