@@ -119,7 +119,7 @@ gulp.task('dev', function () {
     gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'protractor']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
-
+    
     karma.server.start({
         configFile: __dirname + '/karma.conf.js'
     });
