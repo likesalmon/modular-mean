@@ -4,6 +4,16 @@
 
 A boilerplate for MEAN stack projects that uses a modular style to encapsulate related code and tests in the same directories.
 
+## Quickstart
+
+In the terminal, do:
+
+    git clone git@github.com:likesalmon/modular-mean.git
+    npm install
+    gulp build
+    npm start
+    gulp dev // runs a series of build and test watchers
+
 ## Goals
 
 * Shallow directory structure.
