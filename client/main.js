@@ -1,7 +1,7 @@
 'use strict';
 
 require('angular');
-var _ = require('lodash');
+// var _ = require('lodash');
 
 var uiRoute = require('angular-ui-router');
 // var foundationApps = require('foundation-apps');
