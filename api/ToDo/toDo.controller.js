@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var model = require('./todo.model');
+var model = require('./toDo.model');
 
 var all = function (callback) {
     model.findAll(function (err, results) {
