@@ -4,6 +4,7 @@ require('angular');
 var _ = require('lodash');
 
 var uiRoute = require('angular-ui-router');
+// var foundationApps = require('foundation-apps');
 var app = angular.module('MyApp', [uiRoute]);
 
 app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
