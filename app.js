@@ -13,7 +13,7 @@ var app = express();
     Local modules
 */
 
-var todo = require('./api/ToDo/toDo');
+var todo = require('./api/to-do/to-do');
 
 
 /*
