@@ -1,12 +1,12 @@
 'use strict';
 
 var expect = require('expect.js');
-var controller = require('../toDo.controller.js');
+var ToDo = require('../to-do.model.js');
 
-describe('todo.controller', function () {
-    describe('all', function () {
+describe('todo.model', function () {
+    describe('findAll', function () {
         it('should return an array of todo objects', function (done) {
-            controller.all(function (err, results) {
+            ToDo.findAll(function (err, results) {
                 if (err) return done(console.error(err));
 
                 expect(results).to.be.an(Array);
@@ -17,19 +17,17 @@ describe('todo.controller', function () {
                     expect(result).to.have.property('created');
                     expect(result).to.have.property('modified');
                 });
-
                 done();
             });
         });
     });
 
-    describe('one', function () {
-        it('should return a single todo object given an id', function (done) {
-            controller.one(1, function (err, result) {
+    describe('findOne', function () {
+        it('should return a single todo object', function (done) {
+            ToDo.findOne(1, function (err, result) {
                 if (err) return done(console.error(err));
 
                 expect(result).to.be.an(Object);
-
                 expect(result).to.have.property('id');
                 expect(result).to.have.property('title');
                 expect(result).to.have.property('description');
