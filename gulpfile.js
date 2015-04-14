@@ -16,7 +16,7 @@ var webdriver = require('gulp-protractor').webdriver;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
-var nodeTestFiles = ['api/**/test/*.js'];
+var nodeTestFiles = ['api/**/test/*.js', 'client/**/test/*.spec.js'];
 
 /*
     Api tasks
@@ -99,13 +99,15 @@ gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
 });
 
 
-
-
-
+gulp.task('build', ['browserify', 'views', 'sass']);
 
 /*
     Watchers
 */
+gulp.task('unit-tests', function () {
+    gulp.watch(nodeTestFiles, ['mocha']);
+});
+
 gulp.task('dev', function () {
     gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
     gulp.watch(nodeFilesToWatch, ['mocha']);
