@@ -1,11 +1,15 @@
 'use strict';
 
-require('angular');
-var _ = require('lodash');
-
+var angular = require('angular-bsfy');
 var uiRoute = require('angular-ui-router');
-// var foundationApps = require('foundation-apps');
-var app = angular.module('MyApp', [uiRoute]);
+var Dashboard = require('./Dashboard');
+var ToDo = require('./ToDo');
+
+var app = angular.module('MyApp', [
+    uiRoute,
+    ToDo.name,
+    Dashboard.name
+]);
 
 app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
@@ -13,18 +17,18 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
     $stateProvider
         .state('dashboard', {
             url: '/',
-            controller: require('./Dashboard/dashboard.ctrl.js').inject(app),
-            templateUrl: './Dashboard/dashboard.html'
+            controller: require('./Dashboard/Dashboard.ctrl.js'),
+            templateUrl: './Dashboard/Dashboard.html'
         })
         .state('login', {
             url: '/login',
-            controller: require('./Login/login.ctrl.js').inject(app),
-            templateUrl: './Login/login.html'
+            controller: require('./Login/Login.ctrl.js'),
+            templateUrl: './Login/Login.html'
         })
         .state('todo', {
             url: '/todo',
-            controller: require('./ToDo/toDo.ctrl.js').inject(app),
-            templateUrl: './ToDo/toDo.html'
+            controller: require('./ToDo/ToDo.ctrl.js'),
+            templateUrl: './ToDo/ToDo.html'
         });
 
         $urlRouterProvider.otherwise('/');
