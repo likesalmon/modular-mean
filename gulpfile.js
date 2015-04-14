@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var browserify = require('browserify');
@@ -48,7 +47,7 @@ gulp.task('browserify', function () {
         }))
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rename('bundle.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'));
 });
@@ -103,31 +102,21 @@ gulp.task('karma', function () {
     });
 });
 
-<<<<<<< HEAD
-gulp.task('build', ['browserify', 'views', 'sass']);
-=======
-
-
 /*
     Build
 */
 
 gulp.task('build', ['browserify', 'views', 'sass'], function () {
     console.log('Build complete!');
-    console.log('Run with: $ npm start')
+    console.log('Run with: $ npm start');
 });
-
->>>>>>> origin/master
 
 /*
     Watchers
 */
-<<<<<<< HEAD
 gulp.task('unit-tests', function () {
     gulp.watch(nodeTestFiles, ['mocha']);
 });
-=======
->>>>>>> origin/master
 
 gulp.task('dev', function () {
     gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
@@ -135,7 +124,7 @@ gulp.task('dev', function () {
     gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'protractor']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
-    
+
     karma.server.start({
         configFile: __dirname + '/karma.conf.js'
     });
