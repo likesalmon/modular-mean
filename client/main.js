@@ -1,6 +1,12 @@
 'use strict';
 
+<<<<<<< HEAD
 var angular = require('angular-bsfy');
+=======
+require('angular');
+// var _ = require('lodash');
+
+>>>>>>> origin/master
 var uiRoute = require('angular-ui-router');
 var Dashboard = require('./Dashboard');
 var ToDo = require('./ToDo');
@@ -27,7 +33,11 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
         })
         .state('todo', {
             url: '/todo',
+<<<<<<< HEAD
             controller: require('./ToDo/ToDo.ctrl.js'),
+=======
+            controller: require('./ToDo/ToDo.ctrl.js').inject(app),
+>>>>>>> origin/master
             templateUrl: './ToDo/ToDo.html'
         });
 
