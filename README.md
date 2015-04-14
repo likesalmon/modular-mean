@@ -86,4 +86,6 @@ These two blog posts by Ben Lewis of QuickLeft were integral in understanding te
 
 [This article](https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make) by Mark Meyer introduced me to the concept of modular front-end code. Then [this talk at ng-conf](https://www.youtube.com/watch?v=hG-ARy0oqjI) by John Papa about Angular style sealed the deal. The [angular-seed](https://github.com/angular/angular-seed) project has been an important resource in this regard as well.
 
+Ben Clinkinbeard outlines a dead-simple way of organizing Browserify-ed Angular code in the [slides from his ng-conf talk](http://benclinkinbeard.com/talks/2014/ng-conf/#/). Bastian Krol elaborates on these concepts in [this blog post](https://blog.codecentric.de/en/2014/08/angularjs-browserify/).
+
 This article inspired the [client-side authentication](http://arthur.gonigberg.com/2013/06/29/angularjs-role-based-auth/) I'm using.
