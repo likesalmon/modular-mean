@@ -4,6 +4,16 @@
 
 A boilerplate for MEAN stack projects that uses a modular style to encapsulate related code and tests in the same directories.
 
+## Quickstart
+
+In the terminal, do:
+
+    git clone git@github.com:likesalmon/modular-mean.git
+    npm install
+    gulp build
+    npm start
+    gulp dev // runs a series of build and test watchers
+
 ## Goals
 
 * Shallow directory structure.
@@ -17,18 +27,18 @@ A boilerplate for MEAN stack projects that uses a modular style to encapsulate r
 
 The basic idea is to mirror the directory structure in the front-end and the backend.
 
-The api/ directory holds the Node/Express backend. API routes and initialization are handled by the app.js file in the root directory. Each sub-directory of api/ is named using SnakeCase.
+The api/ directory holds the Node/Express backend. API routes and initialization are handled by the app.js file in the root directory. Each sub-directory of api/ is named in lowecase using hyphens (ex. my-module/).
 
-The client/ directory holds the AngularJS code. Notice how similar it is to api/?
+The client/ directory holds the AngularJS code. It is very similar in structure to api/ but the directories in here are named using SnakeCase.
 
 The public/ directory is where Gulp builds the AngularJS code from client/ after it's been processed. The nested SnakeCase-named folders in public/ only contain view.html files. All .js files are combined into a single file called bundle.js that lives in the root of public/.
 
 ```
 modular-mean
 |- api
-    |- MyModule
+    |- my-module
         |- test
-    |- MyOtherModule
+    |- my-other-module
         |- test
 |- client
     |- MyModule
@@ -52,29 +62,30 @@ Consistency and legibility is the goal.
 
 ### Directory naming conventions
 
-* Modules should be named in SnakeCase.
+* Angular modules should be named in SnakeCase.
+* Node modules should be hyphenated
 
 ### File naming conventions
 
-It should be very easy to tell what a file is for and what module it belongs to. They should have unique and descriptive names, without straying to far from conventions. Try not to be clever. The "moduleName.nameOfUse.js" convention works well:
+It should be very easy to tell what a file is for and what module it belongs to. They should have unique and descriptive names, without straying to far from conventions. Try not to be clever. The "ModuleName.nameOfUse.js" convention works well for :
 
 * Node file names should reflect the module they belong to and their place in the MVC structure:
 
-        MyModule/
-        |- myModule.js
-        |- myModule.controller.js
-        |- myModule.model.js
+        my-module/
+        |- my-module.js
+        |- my-module.controller.js
+        |- my-module.model.js
 
-* Angular script file names should reveal their use in four-letter abbreviations. Convention leans toward camelCase (such as "myModuleCtrl.js") but the dot syntax is working well for now:
+* Angular script file names should reveal their use in four-letter abbreviations. Convention leans toward SnakeCase (such as "MyModuleCtrl.js") but the dot syntax is working well for now:
 
         MyModule/
-        |- myModule.ctrl.js
-        |- myModule.srvc.js
-        |- myModule.drct.js
+        |- MyModule.ctrl.js
+        |- MyModule.srvc.js
+        |- MyModule.drct.js
 
 * Angular views should identify the module they belong to and the name of the route:
 
-        myModule.myPage.html
+        MyModule.myPage.html
 
 ## Thanks to these other great projects:
 
