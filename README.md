@@ -76,16 +76,16 @@ It should be very easy to tell what a file is for and what module it belongs to.
         |- my-module.controller.js
         |- my-module.model.js
 
-* Angular script file names should reveal their use in four-letter abbreviations. Convention leans toward SnakeCase (such as "MyModuleCtrl.js") but the dot syntax is working well for now:
+* Angular script file names should reveal their use in four-letter abbreviations. Files should be named using SnakeCase, with a suffix that indicates their use:
 
         MyModule/
-        |- MyModule.ctrl.js
-        |- MyModule.srvc.js
-        |- MyModule.drct.js
+        |- MyModuleController.js
+        |- MyModuleService.js
+        |- MyModuleDirective.js
 
 * Angular views should identify the module they belong to and the name of the route:
 
-        MyModule.myPage.html
+        MyModuleMyPage.html
 
 ## Thanks to these other great projects:
 
