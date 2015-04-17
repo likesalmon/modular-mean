@@ -2,32 +2,19 @@
 
 var angular = require('angular');
 var uiRoute = require('angular-ui-router');
-var Dashboard = require('./Dashboard');
 var ToDo = require('./ToDo');
-var Login = require('./Login');
 
 var app = angular.module('MyApp', [
     uiRoute,
-    ToDo.name,
-    Dashboard.name
+    ToDo.name
 ]);
 
 app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
 
     $stateProvider
-        .state('dashboard', {
-            url: '/',
-            controller: require('./Dashboard/DashboardController.js'),
-            templateUrl: './Dashboard/Dashboard.html'
-        })
-        .state('login', {
-            url: '/login',
-            controller: require('./Login/LoginController.js'),
-            templateUrl: './Login/Login.html'
-        })
         .state('todo', {
-            url: '/todo',
+            url: '/',
             controller: require('./ToDo/ToDoController.js'),
             templateUrl: './ToDo/ToDo.html'
         });
