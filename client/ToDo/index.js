@@ -1,9 +1,7 @@
 'use strict';
 
 var angular = require('angular');
+var confirmButtonDirective = require('./ToDoConfirmButtonDirective');
 
-var app = angular.module('ToDo', []);
-app.directive('confirmButton', require('./ToDoConfirmButtonDirective.js'));
-
-
-module.exports = app;
+module.exports = angular.module('ToDo', [])
+    .directive('confirmButton', require('./ToDoConfirmButtonDirective.js'));
