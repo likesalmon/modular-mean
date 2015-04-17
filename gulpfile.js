@@ -16,7 +16,7 @@ var webdriver = require('gulp-protractor').webdriver;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 
 var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
-var nodeTestFiles = ['api/**/test/*.js', 'client/**/test/*.spec.js'];
+var nodeTestFiles = ['api/**/test/*.js', 'client/**/test/*.test.js'];
 
 /*
     Api tasks

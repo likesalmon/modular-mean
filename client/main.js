@@ -15,22 +15,22 @@ var app = angular.module('MyApp', [
 app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
 
-    $stateProvider
-        .state('dashboard', {
-            url: '/',
-            controller: require('./Dashboard/Dashboard.ctrl.js'),
-            templateUrl: './Dashboard/Dashboard.html'
-        })
-        .state('login', {
-            url: '/login',
-            controller: require('./Login/Login.ctrl.js'),
-            templateUrl: './Login/Login.html'
-        })
-        .state('todo', {
-            url: '/todo',
-            controller: require('./ToDo/ToDo.ctrl.js'),
-            templateUrl: './ToDo/ToDo.html'
-        });
+    // $stateProvider
+    //     .state('dashboard', {
+    //         url: '/',
+    //         controller: require('./Dashboard/DashboardController.js'),
+    //         templateUrl: './Dashboard/Dashboard.html'
+    //     })
+    //     .state('login', {
+    //         url: '/login',
+    //         controller: require('./Login/LoginController.js'),
+    //         templateUrl: './Login/Login.html'
+    //     })
+    //     .state('todo', {
+    //         url: '/todo',
+    //         controller: require('./ToDo/ToDoController.js'),
+    //         templateUrl: './ToDo/ToDo.html'
+    //     });
 
         $urlRouterProvider.otherwise('/');
 }]);

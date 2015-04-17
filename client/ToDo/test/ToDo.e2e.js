@@ -2,7 +2,7 @@
 
 var helper = require('../../helpers/test.helper.js');
 var expect = helper.expect;
-var ToDoPage = require('./toDo.page');
+var ToDoPage = require('./ToDo.page');
 
 describe('todo page', function() {
     beforeEach(function () {
