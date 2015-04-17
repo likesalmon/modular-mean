@@ -27,7 +27,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'client/**/test/*.spec.js',
+            'client/**/test/*.test.js',
         ],
 
 
@@ -38,7 +38,7 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'client/**/test/*.spec.js': ['coverage', 'browserify']
+            'client/**/test/*.test.js': ['coverage', 'browserify']
         },
 
         // test results reporter to use
