@@ -1,6 +1,6 @@
 'use strict';
 
-var angular = require('angular-bsfy');
+var angular = require('angular');
 var uiRoute = require('angular-ui-router');
 var Dashboard = require('./Dashboard');
 var ToDo = require('./ToDo');
