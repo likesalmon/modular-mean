@@ -1,6 +1,6 @@
 'use strict';
 
-var angular = require('angular-bsfy');
+var angular = require('angular');
 
 var app = angular.module('Login', []);
 
