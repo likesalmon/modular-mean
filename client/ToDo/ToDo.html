@@ -1,6 +1,8 @@
-<h1>ToDo</h1>
-<div class="foo">{{foo}}</div>
-<md-button>Flat</md-button>
-<md-button class="md-fab">Fab</md-button>
-<md-button class="md-raised">Raised</md-button>
-<confirm-button></confirm-button>
+<h1>To Do</h1>
+
+<button id="new-todo">New</button>
+
+<div id="todo-list" ng-repeat="todo in todos">
+    <h3>{{todo.title}}</h3>
+    <div class="description" ng-bind-html="todo.description | unsafe"></div>
+</div>
