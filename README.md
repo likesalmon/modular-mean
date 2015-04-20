@@ -24,8 +24,7 @@ In the terminal, do:
     npm install
     gulp build // builds the client project in the /public directory
     npm start
-    gulp dev // starts a series of watchers and test runners for client and api code
-    gulp protractor // runs protractor tests once and exists
+    gulp dev // starts a watchers and test runners for api unit tests, client unit and e2e tests
 
 
 
