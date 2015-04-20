@@ -7,7 +7,7 @@ module.exports = function(config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '',
+        basePath: './',
 
 
         // frameworks to use
@@ -16,7 +16,8 @@ module.exports = function(config) {
 
         plugins : [
             'karma-mocha',
-            'karma-mocha-reporter',
+            'karma-mocha-reporter',,
+            'karma-spec-reporter',
             'karma-browserify',
             'karma-phantomjs-launcher',
             'karma-coverage',
@@ -27,7 +28,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'client/**/test/*.test.js',
+            {pattern: 'client/**/test/*.test.js', watched: false, included: true, served: true}
         ],
 
 
