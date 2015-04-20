@@ -16,8 +16,7 @@ module.exports = function(config) {
 
         plugins : [
             'karma-mocha',
-            'karma-mocha-reporter',,
-            'karma-spec-reporter',
+            'karma-mocha-reporter',
             'karma-browserify',
             'karma-phantomjs-launcher',
             'karma-coverage',
