@@ -22,6 +22,10 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
         $urlRouterProvider.otherwise('/');
 }]);
 
+app.filter('unsafe', ['$sce', function($sce) { 
+    return $sce.trustAsHtml; 
+}]);
+
 // app.run(['$state', '$rootScope', function ($state, $rootScope) {
 //     // var authNotRequired = ['/login', '/todo'];
 //     //
