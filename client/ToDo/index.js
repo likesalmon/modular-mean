@@ -7,4 +7,5 @@ var angularAria = require('angular-aria');
 var confirmButtonDirective = require('./ToDoConfirmButtonDirective');
 
 module.exports = angular.module('ToDo', ['ngMaterial', 'ngAnimate', 'ngAria'])
-    .directive('confirmButton', require('./ToDoConfirmButtonDirective.js'));
+    .directive('confirmButton', require('./ToDoConfirmButtonDirective'))
+    .controller('ToDoController', require('./ToDoController'));
