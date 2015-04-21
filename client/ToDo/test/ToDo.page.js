@@ -7,7 +7,7 @@ function ToDoPage () {
         browser.get(helper.rootUrl + '/todo');
     };
 
-    this.title = element(by.css('h1'));
+    this.banner = element(by.css('#banner'));
     this.newButton = element(by.css('#new-todo'));
     this.todoList = element.all(by.repeater('todo in todos'));
     this.search = element(by.model('search'));
