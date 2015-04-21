@@ -7,7 +7,10 @@ function ToDoPage () {
         browser.get(helper.rootUrl + '/todo');
     };
 
-    this.foo = element(by.binding('foo'));
+    this.title = element(by.css('h1'));
+    this.newButton = element(by.css('#new-todo'));
+    this.todoList = element(by.binding('todo in todos'));
+    this.search = element(by.model('search'));
 }
 
 module.exports = ToDoPage;
