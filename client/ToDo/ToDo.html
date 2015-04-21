@@ -1,17 +1,27 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-    <md-button id="new-todo" class="md-fab md-mini">+</md-button>
+<div class="topbar-elements">
+    <md-button id="new-todo" class="md-fab md-mini" flex>+</md-button>
+</div>
 
-    <md-list layout="column">
-        <md-item id="todo-list" ng-repeat="todo in todos">
-            <button class="md-button" ng-click="select(todo)">
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <div layout="column" layout-padding>
+        <md-input-container>
+            <label for="q">Search</label>
+            <input type="text" name="q" ng-model="q" value="">
+        </md-input-container>
+    </div>
+
+    <md-list class="sidebar-list" layout="column">
+        <md-item ng-repeat="todo in todos | filter:q as results">
+            <button class="md-button" ng-click="select(todo)" layout-fill>
                 <h3>{{todo.title}}</h3>
             </button>
-            <div class="md-ripple-container"></div>
         </md-item>
+
+        <md-item ng-if="results.length === 0">No results found...</md-item>
     </md-list>
 </md-sidenav>
 
-<md-content layout="column" flex id="content">
+<md-content layout="column" flex id="content" layout-padding>
     <h3>{{selected.title}}</h3>
     <div class="description" ng-bind-html="selected.description | unsafe"></div>
 </md-content>
