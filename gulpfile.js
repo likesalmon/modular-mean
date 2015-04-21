@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var browserify = require('browserify');
@@ -23,7 +24,10 @@ var nodeTestFiles = ['api/**/test/*.js', 'client/**/test/*.test.js'];
 */
 gulp.task('mocha', function () {
     return gulp.src(nodeTestFiles, {read: false})
-        .pipe(mocha({reporter: 'spec'}));
+        .pipe(mocha({reporter: 'spec'}))
+        .on('end', function () {
+            gutil.log('\n\n***** Mocha Tests Complete *****\n\n\n\n');
+        });
 });
 
 gulp.task('lint-api', function() {
@@ -93,6 +97,9 @@ gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
         }))
         .on('error', function(err) {
             console.error(err);
+        })
+        .on('end', function () {
+            gutil.log('\n\n***** Protractor Tests Complete *****\n\n\n\n');
         });
 });
 
@@ -107,8 +114,7 @@ gulp.task('karma', function () {
 */
 
 gulp.task('build', ['browserify', 'views', 'sass'], function () {
-    console.log('Build complete!');
-    console.log('Run with: $ npm start');
+    gutil.log('*** Run with: $ npm start ***');
 });
 
 /*
@@ -119,9 +125,9 @@ gulp.task('unit-tests', function () {
 });
 
 gulp.task('dev', function () {
-    gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
+    // gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
     gulp.watch(nodeFilesToWatch, ['mocha']);
-    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['lint-client', 'browserify', 'protractor']);
+    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['browserify', 'protractor']);
     gulp.watch(['client/**/*.html'], ['views']);
     gulp.watch(['client/sass/*.scss'], ['sass']);
 
