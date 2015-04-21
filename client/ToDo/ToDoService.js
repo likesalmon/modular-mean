@@ -1,15 +1,23 @@
 'use strict';
 
 var _ = require('lodash');
+var moment = require('moment');
 
 module.exports = function () {
     var todos = [
         {
-            id: 1,
-            title: 'Example Todo',
-            description: 'This is an example.',
-            created: new Date(),
-            modified: new Date()
+            id: _.random(0, 9999),
+            title: 'First todo',
+            description: 'This is the first thing to do.',
+            created: moment().startOf('hour').format(),
+            modified: moment().startOf('hour').format()
+        },
+        {
+            id: _.random(0, 9999),
+            title: 'Second todo',
+            description: 'This is the second thing to do.',
+            created: moment().startOf('day').format(),
+            modified: moment().startOf('day').format()
         }
     ];
 
