@@ -1,14 +1,11 @@
 'use strict';
 
-module.exports = ['$scope', function ($scope) {
-    $scope.todos = [
-        {
-            title: 'First todo',
-            description: '<p>This is the first thing to do.</p>'
-        },
-        {
-            title: 'Second todo',
-            description: '<p>This is the second thing to do.</p>'
-        }
-    ];
+module.exports = ['$scope', 'ToDoService', function ($scope, ToDoService) {
+    $scope.todos = ToDoService.all();
+
+    $scope.selected = $scope.todos[0];
+
+    $scope.select = function (item) {
+        $scope.selected = item;
+    };
 }];
