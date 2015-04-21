@@ -15,7 +15,7 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
     $stateProvider
         .state('todo', {
             url: '/',
-            controller: require('./ToDo/ToDoController.js'),
+            controller: 'ToDoController',
             templateUrl: './ToDo/ToDo.html'
         });
 
