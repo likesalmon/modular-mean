@@ -9,7 +9,7 @@ function ToDoPage () {
 
     this.title = element(by.css('h1'));
     this.newButton = element(by.css('#new-todo'));
-    this.todoList = element(by.binding('todo in todos'));
+    this.todoList = element.all(by.repeater('todo in todos'));
     this.search = element(by.model('search'));
 }
 
