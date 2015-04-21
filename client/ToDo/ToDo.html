@@ -1,8 +1,17 @@
-<h1>To Do</h1>
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <md-button id="new-todo" class="md-fab md-mini">+</md-button>
 
-<button id="new-todo">New</button>
+    <md-list layout="column">
+        <md-item id="todo-list" ng-repeat="todo in todos">
+            <button class="md-button" ng-click="select(todo)">
+                <h3>{{todo.title}}</h3>
+            </button>
+            <div class="md-ripple-container"></div>
+        </md-item>
+    </md-list>
+</md-sidenav>
 
-<div id="todo-list" ng-repeat="todo in todos">
-    <h3>{{todo.title}}</h3>
-    <div class="description" ng-bind-html="todo.description | unsafe"></div>
-</div>
+<md-content layout="column" flex id="content">
+    <h3>{{selected.title}}</h3>
+    <div class="description" ng-bind-html="selected.description | unsafe"></div>
+</md-content>
