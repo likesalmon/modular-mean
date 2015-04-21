@@ -10,8 +10,41 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body ng-app="MyApp" ng-strict-di>
-        <div ui-view="" layout="column"></div>
+    <body ng-app="MyApp" ng-strict-di layout="column">
+        <md-toolbar layout="row">
+            <h1 class="md-toolbar-tools" layout-align-gt-sm="center">Hello World</h1>
+        </md-toolbar>
+
+        <!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2 md-locked-open" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+            <md-content flex role="navigation">
+                <ul>
+                    <li>One</li>
+                    <li>Two</li>
+                    <li>Three</li>
+                </ul>
+            </md-content>
+        </md-sidenav> -->
+
+        <div ui-view="" layout="row" flex></div>
+
+        <!-- <md-bottom-sheet class="md-list md-has-header">
+
+            <md-subheader>
+                Contact <span class="name">{{ vm.user.name }}</span>:
+            </md-subheader>
+
+            <md-list>
+              <md-item ng-repeat="item in vm.items">
+                <md-button ng-click="vm.performAction(item)">
+                    <md-icon md-svg-icon="{{ item.icon_url }}"></md-icon>
+                    {{item.name}}
+                </md-button>
+              </md-item>
+              <md-item><a>One</a></md-item>
+              <md-item><a>Two</a></md-item>
+            </md-list>
+
+        </md-bottom-sheet> -->
 
         <script src="bundle.js"></script>
     </body>
