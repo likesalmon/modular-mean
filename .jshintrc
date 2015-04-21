@@ -5,7 +5,8 @@
     "expr" : true,
     "forin": true,
     "globals": {
-        "angular": true
+        "angular": true,
+        "$scope": true
     },
     "immed": true,
     "indent": 4,
