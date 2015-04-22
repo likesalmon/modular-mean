@@ -2,14 +2,17 @@
 
 var expect = require('chai').expect;
 var ToDoController = require('../ToDoController');
+var tds = require('../ToDoService');
 
 describe('ToDoController', function() {
     var scope,
-        ctrl;
+        ctrl,
+        ToDoService;
 
     beforeEach(function () {
         scope = {};
-        ctrl = new ToDoController[1](scope);
+        ToDoService = new tds();
+        ctrl = new ToDoController[ToDoController.length - 1](scope, ToDoService);
     });
 
     it('ToDoController should exist', function() {
