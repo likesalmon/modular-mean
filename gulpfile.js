@@ -59,15 +59,6 @@ gulp.task('browserify', function () {
 gulp.task('views', function () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
-
-    gulp.src('client/Login/*.html')
-        .pipe(gulp.dest('public/Login/'));
-
-    gulp.src('client/Dashboard/*.html')
-        .pipe(gulp.dest('public/Dashboard/'));
-
-    gulp.src('client/ToDo/*.html')
-        .pipe(gulp.dest('public/ToDo/'));
 });
 
 gulp.task('sass', function () {
