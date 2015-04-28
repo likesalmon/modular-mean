@@ -1,5 +1,6 @@
 'use strict';
 
+var del = require('del');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
@@ -7,23 +8,27 @@ var rename = require('gulp-rename');
 var browserify = require('browserify');
 var through2 = require('through2');
 var mocha = require('gulp-mocha');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
+var compass = require('gulp-compass');
+// var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
+// var uglify = require('gulp-uglify');
 var karma = require('karma');
 var protractor = require('gulp-protractor').protractor;
 var webdriver = require('gulp-protractor').webdriver;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 
-var nodeFilesToWatch = ['app.js', 'api/**/*.js'];
-var nodeTestFiles = ['api/**/test/*.js', 'client/**/test/*.test.js'];
+var paths = {
+    api: {
+        tests: ['api/**/test/*.js'],
+        all: ['app.js', 'api/**/*.js']
+    }
+};
 
 /*
     Api tasks
 */
 gulp.task('mocha', function () {
-    return gulp.src(nodeTestFiles, {read: false})
+    return gulp.src(paths.api.tests, {read: false})
         .pipe(mocha({reporter: 'spec'}))
         .on('end', function () {
             gutil.log('\n\n***** Mocha Tests Complete *****\n\n\n\n');
@@ -59,15 +64,33 @@ gulp.task('browserify', function () {
 gulp.task('views', function () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
+
+    gulp.src('client/ToDo/*.html')
+        .pipe(gulp.dest('public/ToDo/'));
 });
 
-gulp.task('sass', function () {
+gulp.task('compass', function () {
     gulp.src('client/sass/*.scss')
-        .pipe(sass({ onError: function (err) {
-            console.error(err);
-        }}))
-        .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
-        .pipe(gulp.dest('public/css/'));
+        .pipe(compass({
+            http_path: '/',
+            project: __dirname + '/client',
+            css: 'css',
+            sass: 'sass',
+            image: 'images',
+            font: 'css'
+        }))
+        .on('error', function(error) {
+            console.error(error);
+            this.emit('end');
+        })
+        // .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
+        // .pipe(minifyCSS())
+        .pipe(gulp.dest('public/css'));
+});
+
+gulp.task('images', function () {
+    gulp.src('client/images/**/*')
+        .pipe(gulp.dest('public/images/'));
 });
 
 gulp.task('lint-client', function () {
@@ -100,13 +123,19 @@ gulp.task('karma', function () {
     });
 });
 
+
 /*
     Build
 */
 
-gulp.task('build', ['browserify', 'views', 'sass'], function () {
+gulp.task('clean', function (cb) {
+    del(['public/**/*'], cb);
+});
+
+gulp.task('build', ['clean', 'browserify', 'views', 'compass'], function () {
     gutil.log('*** Run with: $ npm start ***');
 });
+
 
 /*
     Watchers
@@ -117,10 +146,10 @@ gulp.task('unit-tests', function () {
 
 gulp.task('dev', function () {
     // gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
-    gulp.watch(nodeFilesToWatch, ['mocha']);
+    gulp.watch(paths.api.all, ['mocha']);
     gulp.watch(['client/**/*.js', '!client/test/*.js'], ['browserify', 'protractor']);
     gulp.watch(['client/**/*.html'], ['views']);
-    gulp.watch(['client/sass/*.scss'], ['sass']);
+    gulp.watch(['client/sass/*.scss'], ['compass']);
 
     karma.server.start({
         configFile: __dirname + '/karma.conf.js'
