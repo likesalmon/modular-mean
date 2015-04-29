@@ -9,7 +9,7 @@ var browserify = require('browserify');
 var through2 = require('through2');
 var mocha = require('gulp-mocha');
 var compass = require('gulp-compass');
-// var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
 // var uglify = require('gulp-uglify');
 var karma = require('karma');
@@ -39,6 +39,10 @@ gulp.task('lint-api', function() {
     return gulp.src(['app.js', './api/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
+});
+
+gulp.task('api-tests', function () {
+    gulp.watch(paths.api.all, ['mocha']);
 });
 
 
@@ -83,7 +87,7 @@ gulp.task('compass', function () {
             console.error(error);
             this.emit('end');
         })
-        // .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
+        .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
         // .pipe(minifyCSS())
         .pipe(gulp.dest('public/css'));
 });
@@ -141,7 +145,7 @@ gulp.task('build', ['clean', 'browserify', 'views', 'compass'], function () {
     Watchers
 */
 gulp.task('unit-tests', function () {
-    gulp.watch(nodeTestFiles, ['mocha']);
+    gulp.watch(paths.api.tests, ['mocha']);
 });
 
 gulp.task('dev', function () {
