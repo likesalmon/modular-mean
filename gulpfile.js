@@ -9,6 +9,7 @@ var browserify = require('browserify');
 var through2 = require('through2');
 var mocha = require('gulp-mocha');
 var compass = require('gulp-compass');
+var minifyCss = require('gulp-minify-css');
 var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
 // var uglify = require('gulp-uglify');
@@ -87,7 +88,9 @@ gulp.task('compass', function () {
             browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
             cascade: false
         }))
-        // .pipe(minifyCSS())
+        .pipe(sourcemaps.init())
+        .pipe(minifyCss())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('public/css'));
 });
 
