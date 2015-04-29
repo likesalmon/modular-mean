@@ -78,16 +78,15 @@ gulp.task('compass', function () {
         .pipe(compass({
             http_path: '/',
             project: __dirname + '/client',
-            css: 'css',
+            css: '../public/css',
             sass: 'sass',
             image: 'images',
             font: 'css'
         }))
-        .on('error', function(error) {
-            console.error(error);
-            this.emit('end');
-        })
-        .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
+        .pipe(autoprefixer({
+            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
+            cascade: false
+        }))
         // .pipe(minifyCSS())
         .pipe(gulp.dest('public/css'));
 });
