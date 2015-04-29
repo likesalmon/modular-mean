@@ -12,7 +12,7 @@ var compass = require('gulp-compass');
 var minifyCss = require('gulp-minify-css');
 var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
-// var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify');
 var karma = require('karma');
 var protractor = require('gulp-protractor').protractor;
 var webdriver = require('gulp-protractor').webdriver;
@@ -61,7 +61,7 @@ gulp.task('browserify', function () {
         }))
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rename('bundle.js'))
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'));
 });
