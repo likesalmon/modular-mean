@@ -5,7 +5,10 @@
   "author": "Ammon Morris <likesalmon@gmail.com>",
   "repository": "git@github.com:likesalmon/modular-mean.git",
   "scripts": {
-    "start": "node ./bin/www"
+    "prestart": "gulp build",
+    "start": "node ./bin/www",
+    "test": "gulp test",
+    "dev": "gulp build && gulp dev"
   },
   "dependencies": {
     "angular": "^1.3.15",
