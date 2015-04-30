@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /**
  * Module dependencies.
  */
 
 var app = require('../app');
-var debug = require('debug')('likesalmon-express-boilerplate:server');
+var debug = require('debug')('modular-mean:server');
 var http = require('http');
 
 /**
