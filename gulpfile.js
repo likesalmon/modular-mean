@@ -12,7 +12,7 @@ var compass = require('gulp-compass');
 var minifyCss = require('gulp-minify-css');
 var autoprefixer = require('gulp-autoprefixer');
 var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
+// var uglify = require('gulp-uglify');
 var karma = require('karma');
 var protractor = require('gulp-protractor').protractor;
 var webdriver = require('gulp-protractor').webdriver;
@@ -24,42 +24,53 @@ var webdriverUpdate = require('gulp-protractor').webdriver_update;
 var paths = {
     api: {
         tests: ['api/**/test/*.js'],
-        all: ['app.js', 'api/**/*.js']
+        scripts: ['app.js', 'api/**/*.js']
     },
     client: {
+        images: ['client/images/**/*'],
+        sass: ['client/sass/*.scss'],
+        scripts: ['client/**/*.js', '!client/**/test/*.js'],
+        tests: ['client/**/test/*.test.js'],
+        e2e: ['client/**/test/*.e2e.js'],
         views: [ // Just the module name, ex.: ToDo
             'ToDo'
         ]
     }
 };
 
+
 /*
     Api tasks
 */
-gulp.task('mocha', function () {
+function mochaSingleRun () {
     return gulp.src(paths.api.tests, {read: false})
         .pipe(mocha({reporter: 'spec'}))
         .on('end', function () {
             gutil.log('\n\n***** Mocha Tests Complete *****\n\n\n\n');
         });
-});
+}
 
-gulp.task('lint-api', function() {
-    return gulp.src(['app.js', './api/**/*.js'])
+gulp.task('mocha', mochaSingleRun);
+
+
+function lintApi () {
+    return gulp.src(paths.api.scripts)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
-});
+}
 
-gulp.task('api-tests', function () {
-    gulp.watch(paths.api.all, ['mocha']);
-});
+gulp.task('lint-api', lintApi);
 
+
+gulp.task('api-test-watcher', function () {
+    gulp.watch(paths.api.scripts, ['mocha']);
+});
 
 /*
     Client tasks
 */
-gulp.task('browserify', function () {
-    gulp.src(['./client/main.js'])
+function bundle () {
+    return gulp.src(['./client/main.js'])
         .pipe(through2.obj(function (file, enc, next) {
             browserify(file.path)
                 .bundle(function (err, res) {
@@ -69,12 +80,15 @@ gulp.task('browserify', function () {
         }))
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(rename('bundle.js'))
-        .pipe(uglify())
+        // .pipe(uglify()) // adds 5+ seconds to build
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public'));
-});
+}
 
-gulp.task('views', function () {
+gulp.task('browserify', bundle);
+
+
+function views () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
 
@@ -82,11 +96,13 @@ gulp.task('views', function () {
         gulp.src('client/' + dir + '/*.html')
             .pipe(gulp.dest('public/' + dir + '/'));
     });
+}
 
-});
+gulp.task('views', views);
 
-gulp.task('compass', function () {
-    gulp.src('client/sass/*.scss')
+
+function css () {
+    return gulp.src(paths.client.sass)
         .pipe(compass({
             http_path: '/',
             project: __dirname + '/client',
@@ -103,25 +119,30 @@ gulp.task('compass', function () {
         .pipe(minifyCss())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('public/css'));
-});
+}
 
-gulp.task('images', function () {
-    gulp.src('client/images/**/*')
+gulp.task('compass', css);
+
+
+function images () {
+    return gulp.src(paths.client.images)
         .pipe(gulp.dest('public/images/'));
-});
+}
 
-gulp.task('lint-client', function () {
-    gulp.src(['client/**/*.js', '!client/test/*.js'])
+gulp.task('images', images);
+
+
+function lintClient () {
+    return gulp.src(paths.client.scripts.concat(paths.client.e2e))
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
-});
+}
+
+gulp.task('lint-client', lintClient);
 
 
-gulp.task('webdriver-update', webdriverUpdate);
-gulp.task('webdriver', webdriver);
-
-gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
-    return gulp.src('client/**/test/*.e2e.js')
+function protractorSingleRun () {
+    return gulp.src(paths.client.e2e)
         .pipe(protractor({
             configFile: './protractor.conf.js',
             args: ['--baseUrl', 'http://127.0.0.1:3000']
@@ -132,13 +153,29 @@ gulp.task('protractor', ['webdriver-update', 'webdriver'], function () {
         .on('end', function () {
             gutil.log('\n\n***** Protractor Tests Complete *****\n\n\n\n');
         });
-});
+}
 
-gulp.task('karma', function () {
+gulp.task('webdriver-update', webdriverUpdate);
+gulp.task('webdriver', webdriver);
+gulp.task('protractor', ['webdriver-update', 'webdriver'], protractorSingleRun);
+
+
+function karmaWatch () {
     karma.server.start({
         configFile: __dirname + '/karma.conf.js'
     });
-});
+}
+
+gulp.task('karma', karmaWatch);
+
+function karmaSingleRun () {
+    karma.server.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    });
+}
+
+gulp.task('karma-single-run', karmaSingleRun);
 
 
 /*
@@ -149,26 +186,58 @@ gulp.task('clean', function (cb) {
     del(['public/**/*'], cb);
 });
 
-gulp.task('build', ['clean', 'browserify', 'views', 'compass'], function () {
-    gutil.log('*** Run with: $ npm start ***');
+gulp.task('build', ['clean'], function () {
+    bundle();
+    css();
+    images();
+    views();
 });
 
 
 /*
-    Watchers
+    Single run test
 */
-gulp.task('unit-tests', function () {
-    gulp.watch(paths.api.tests, ['mocha']);
+
+gulp.task('test', ['clean'], function () {
+    bundle();
+    css();
+    images();
+    views();
+    karmaSingleRun();
+    protractorSingleRun();
+    mochaSingleRun();
 });
 
-gulp.task('dev', function () {
-    // gulp.watch(['app.js', 'api/**/*.js'], ['lint-api']);
-    gulp.watch(paths.api.all, ['mocha']);
-    gulp.watch(['client/**/*.js', '!client/test/*.js'], ['browserify', 'protractor']);
-    gulp.watch(['client/**/*.html'], ['views']);
-    gulp.watch(['client/sass/*.scss'], ['compass']);
 
-    karma.server.start({
-        configFile: __dirname + '/karma.conf.js'
-    });
+/*
+    Dev
+*/
+
+gulp.task('dev', function () {
+    // var clientFilesToWatch = paths.client.scripts.concat(
+    //     paths.client.views,
+    //     paths.client.sass,
+    //     paths.client.images
+    // );
+    // console.error(clientFilesToWatch);
+    //
+    // gulp.watch(clientFilesToWatch, ['clean'], function () {
+    //     bundle();
+    //     images();
+    //     views();
+    //     css();
+    // });
+    //
+    // karmaWatch();
+    // gulp.watch(paths.api.scripts, ['mocha']);
+    // gulp.watch(paths.client.e2e, ['protractor']);
+
+    karmaWatch();
+    gulp.watch(paths.client.scripts, ['browserify']);
+    gulp.watch(paths.client.e2e, ['protractor']);
+    gulp.watch(paths.client.images, ['images']);
+    gulp.watch(paths.client.views, ['views']);
+    gulp.watch(paths.client.sass, ['compass']);
+    gulp.watch(paths.api.scripts, ['mocha']);
+    //
 });
