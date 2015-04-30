@@ -2,11 +2,13 @@
 
 var angular = require('angular');
 var uiRoute = require('angular-ui-router');
+var Navigation = require('./Navigation');
 var ToDo = require('./ToDo');
 
 var app = angular.module('MyApp', [
     uiRoute,
-    ToDo.name
+    ToDo.name,
+    Navigation.name
 ]);
 
 app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
@@ -22,8 +24,8 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
         $urlRouterProvider.otherwise('/');
 }]);
 
-app.filter('unsafe', ['$sce', function($sce) { 
-    return $sce.trustAsHtml; 
+app.filter('unsafe', ['$sce', function($sce) {
+    return $sce.trustAsHtml;
 }]);
 
 // app.run(['$state', '$rootScope', function ($state, $rootScope) {
