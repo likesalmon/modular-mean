@@ -18,10 +18,18 @@ var protractor = require('gulp-protractor').protractor;
 var webdriver = require('gulp-protractor').webdriver;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 
+/*
+    Paths
+*/
 var paths = {
     api: {
         tests: ['api/**/test/*.js'],
         all: ['app.js', 'api/**/*.js']
+    },
+    client: {
+        views: [ // Just the module name, ex.: ToDo
+            'ToDo'
+        ]
     }
 };
 
@@ -70,8 +78,11 @@ gulp.task('views', function () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
 
-    gulp.src('client/ToDo/*.html')
-        .pipe(gulp.dest('public/ToDo/'));
+    paths.client.views.forEach(function (dir) {
+        gulp.src('client/' + dir + '/*.html')
+            .pipe(gulp.dest('public/' + dir + '/'));
+    });
+
 });
 
 gulp.task('compass', function () {
