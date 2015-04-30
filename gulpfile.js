@@ -214,24 +214,6 @@ gulp.task('test', ['clean'], function () {
 */
 
 gulp.task('dev', function () {
-    // var clientFilesToWatch = paths.client.scripts.concat(
-    //     paths.client.views,
-    //     paths.client.sass,
-    //     paths.client.images
-    // );
-    // console.error(clientFilesToWatch);
-    //
-    // gulp.watch(clientFilesToWatch, ['clean'], function () {
-    //     bundle();
-    //     images();
-    //     views();
-    //     css();
-    // });
-    //
-    // karmaWatch();
-    // gulp.watch(paths.api.scripts, ['mocha']);
-    // gulp.watch(paths.client.e2e, ['protractor']);
-
     karmaWatch();
     gulp.watch(paths.client.scripts, ['browserify']);
     gulp.watch(paths.client.e2e, ['protractor']);
@@ -239,5 +221,4 @@ gulp.task('dev', function () {
     gulp.watch(paths.client.views, ['views']);
     gulp.watch(paths.client.sass, ['compass']);
     gulp.watch(paths.api.scripts, ['mocha']);
-    //
 });
