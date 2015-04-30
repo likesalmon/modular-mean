@@ -32,7 +32,8 @@ var paths = {
         scripts: ['client/**/*.js', '!client/**/test/*.js'],
         tests: ['client/**/test/*.test.js'],
         e2e: ['client/**/test/*.e2e.js'],
-        views: [ // Just the module name, ex.: ToDo
+        views: ['client/**/*.html'],
+        modules: [ // Just the module name, ex.: ToDo
             'ToDo'
         ]
     }
@@ -92,7 +93,7 @@ function views () {
     gulp.src('client/index.html')
         .pipe(gulp.dest('public/'));
 
-    paths.client.views.forEach(function (dir) {
+    paths.client.modules.forEach(function (dir) {
         gulp.src('client/' + dir + '/*.html')
             .pipe(gulp.dest('public/' + dir + '/'));
     });
