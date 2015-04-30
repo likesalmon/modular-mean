@@ -1,0 +1,31 @@
+.md-toolbar-tools h1 {
+    font-weight: 400;
+}
+
+.md-sidenav-right,
+.md-sidenav-left {
+    button {
+        text-align: left;
+    }
+
+    .sidenav-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            a,
+            .md-button {
+                width: 100%;
+                display: block;
+                text-align: left;
+                line-height: 30px;
+                border-radius: 0;
+
+                &.md-accent {
+                    background: rgba(158,158,158,0.2);
+                }
+            }
+        }
+    }
+}
