@@ -10,41 +10,42 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body ng-app="MyApp" ng-strict-di layout="column">
-        <md-toolbar layout="row" id="topbar">
-            <h1 id="banner" class="md-toolbar-tools" layout-align-gt-sm="center">To Do</h1>
+    <body ng-app="MyApp" layout="column" ng-controller="NavigationController" ng-strict-di>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h1>Modular Mean</h1>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Toggle Navigation" hide-gt-sm>
+                    <span class="visually-hidden">Menu</span>
+                    <ng-md-icon class="menu" style="fill: #fff" icon="menu" size="30" ng-click="toggleRightSidenav()"></ng-md-icon>
+                </md-button>
+                <div hide-sm>
+                    <md-button ng-repeat="item in nav.items" ui-sref="{{ item.state }}" ui-sref-active="md-accent">{{ item.title }}</md-button>
+                </div>
+            </div>
         </md-toolbar>
 
-        <!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2 md-locked-open" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-            <md-content flex role="navigation">
-                <ul>
-                    <li>One</li>
-                    <li>Two</li>
-                    <li>Three</li>
-                </ul>
-            </md-content>
-        </md-sidenav> -->
+        <div layout="row" flex>
 
-        <div ui-view="" layout="row" flex></div>
+            <div md-content ui-view="" layout="row" flex></div>
 
-        <!-- <md-bottom-sheet class="md-list md-has-header">
+            <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2><span>Navigation</span></h2>
+                    </div>
+                </md-toolbar>
+                <md-content flex role="navigation">
+                    <ul class="sidenav-list" layout="column">
+                        <li ng-repeat="item in nav.items">
+                            <md-button class="md-button" ui-sref="{{ item.state }}" ui-sref-active="md-accent">{{ item.title }}</md-button>
+                            <md-divider></md-divider>
+                        </li>
+                    </ul>
+                </md-content>
+            </md-sidenav>
 
-            <md-subheader>
-                Contact <span class="name">{{ vm.user.name }}</span>:
-            </md-subheader>
-
-            <md-list>
-              <md-item ng-repeat="item in vm.items">
-                <md-button ng-click="vm.performAction(item)">
-                    <md-icon md-svg-icon="{{ item.icon_url }}"></md-icon>
-                    {{item.name}}
-                </md-button>
-              </md-item>
-              <md-item><a>One</a></md-item>
-              <md-item><a>Two</a></md-item>
-            </md-list>
-
-        </md-bottom-sheet> -->
+        </div>
 
         <script src="bundle.js"></script>
     </body>
