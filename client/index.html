@@ -38,7 +38,7 @@
                 <md-content flex role="navigation">
                     <ul class="sidenav-list" layout="column">
                         <li ng-repeat="item in nav.items">
-                            <md-button class="md-button" ui-sref="{{ item.state }}" ui-sref-active="md-accent">{{ item.title }}</md-button>
+                            <md-button ui-sref="{{ item.state }}" ui-sref-active="md-accent">{{ item.title }}</md-button>
                             <md-divider></md-divider>
                         </li>
                     </ul>
