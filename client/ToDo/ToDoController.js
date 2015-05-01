@@ -3,9 +3,13 @@
 module.exports = ['$scope', 'ToDoService', function ($scope, ToDoService) {
     $scope.todos = ToDoService.all();
 
-    $scope.selected = $scope.todos[0];
-
     $scope.select = function (item) {
+        $scope.todos.forEach(function (todo) {
+            todo.selected = false;
+        });
+        item.selected = true;
+        
         $scope.selected = item;
     };
+
 }];
