@@ -13,7 +13,6 @@ In the terminal, do:
     git clone git@github.com:likesalmon/modular-mean.git
     cd modular-mean
     npm install
-    gulp build
     npm start
 
 
@@ -22,11 +21,8 @@ In the terminal, do:
 
     git clone git@github.com:likesalmon/modular-mean.git
     npm install
-    gulp build // builds the client project in the /public directory
     npm start
-    gulp dev // starts a watchers and test runners for api unit tests, client unit and e2e tests
-
-
+    npm run dev
 
 
 ## Goals
