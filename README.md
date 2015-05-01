@@ -11,7 +11,7 @@ A boilerplate for MEAN stack projects that uses a modular style to encapsulate r
 In the terminal, do:
 
     git clone git@github.com:likesalmon/modular-mean.git
-    cd modular-mean
+    cd modular-mean/
     npm install
     npm start
 
@@ -20,6 +20,7 @@ In the terminal, do:
 ## Development Quickstart
 
     git clone git@github.com:likesalmon/modular-mean.git
+    cd modular-mean/
     npm install
     npm start
     npm run dev
