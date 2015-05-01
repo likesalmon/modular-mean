@@ -8,10 +8,13 @@ describe('NavigationController', function() {
     var scope,
         mdSidenav,
         NavigationService,
+        mdMedia,
         ctrl;
 
     beforeEach(function () {
-        scope = {};
+        scope = {
+            $watch: function () {}
+        };
         NavigationService = new Service();
 
         mdSidenav = function (elId) {
@@ -22,7 +25,11 @@ describe('NavigationController', function() {
             };
         };
 
-        ctrl = new Controller[Controller.length - 1](scope, mdSidenav, NavigationService);
+        mdMedia = function (size) {
+            return size;
+        };
+
+        ctrl = new Controller[Controller.length - 1](scope, mdSidenav, mdMedia, NavigationService);
     });
 
     it('NavigationController should exist', function() {
