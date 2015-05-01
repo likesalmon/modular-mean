@@ -3,11 +3,13 @@
 var angular = require('angular');
 var uiRoute = require('angular-ui-router');
 var Navigation = require('./Navigation');
+var Dashboard = require('./Dashboard');
 var ToDo = require('./ToDo');
 
 var app = angular.module('MyApp', [
     uiRoute,
     ToDo.name,
+    Dashboard.name,
     Navigation.name
 ]);
 
@@ -15,13 +17,18 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
     $locationProvider.html5Mode(true);
 
     $stateProvider
+        .state('dashboard', {
+            url: '/dashboard',
+            controller: 'DashboardController',
+            templateUrl: './Dashboard/Dashboard.html'
+        })
         .state('todo', {
-            url: '/',
+            url: '/todo',
             controller: 'ToDoController',
             templateUrl: './ToDo/ToDo.html'
         });
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/dashboard');
 }]);
 
 app.filter('unsafe', ['$sce', function($sce) {
