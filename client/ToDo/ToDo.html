@@ -1,23 +1,30 @@
 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-    <div layout="column" layout-padding>
-        <md-input-container>
+    <md-content role="" flex>
+        <md-input-container layout-padding>
             <label for="q">Search</label>
             <input type="text" name="q" ng-model="q" value="">
         </md-input-container>
-    </div>
 
-    <md-list class="sidebar-list" layout="column">
-        <md-item ng-repeat="todo in todos | filter:q as results">
-            <button class="md-button" ng-click="select(todo)" layout-fill>
-                <h3>{{todo.title}}</h3>
-            </button>
-        </md-item>
+        <md-divider></md-divider>
 
-        <md-item ng-if="results.length === 0">No results found...</md-item>
-    </md-list>
+        <ul class="sidenav-list">
+            <li ng-repeat="todo in todos | filter:q as results">
+                <md-button class="md-button" ng-click="select(todo)" ng-class="{ 'md-accent': item.selected }" layout-fill>
+                    <h3>{{todo.title}}</h3>
+                </md-button>
+                <md-divider></md-divider>
+            </li>
+
+            <li ng-if="results.length === 0">No results found...</li>
+        </ul>
+    </md-content>
 </md-sidenav>
 
 <md-content layout="column" flex id="content" layout-padding>
-    <h3>{{selected.title}}</h3>
-    <div class="description" ng-bind-html="selected.description | unsafe"></div>
+    <div ng-if="!selected"><h3>Please select a todo</h3></div>
+
+    <div ng-if="selected">
+        <h3>{{selected.title}}</h3>
+        <div class="description" ng-bind-html="selected.description | unsafe"></div>
+    </div>
 </md-content>
