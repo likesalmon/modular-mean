@@ -1,21 +1,21 @@
 'use strict';
 
 var expect = require('chai').expect;
-var Controller = require('../NavigationController');
-var Service = require('../NavigationService');
+var NavigationController = require('../NavigationController');
+var NavigationService = require('../NavigationService');
 
 describe('NavigationController', function() {
     var scope,
         mdSidenav,
-        NavigationService,
+        Service,
         mdMedia,
-        ctrl;
+        Controller;
 
     beforeEach(function () {
         scope = {
             $watch: function () {}
         };
-        NavigationService = new Service();
+        Service = new NavigationService();
 
         mdSidenav = function (elId) {
             return {
@@ -29,11 +29,11 @@ describe('NavigationController', function() {
             return size;
         };
 
-        ctrl = new Controller[Controller.length - 1](scope, mdSidenav, mdMedia, NavigationService);
+        Controller = new NavigationController[NavigationController.length - 1](scope, mdSidenav, mdMedia, Service);
     });
 
     it('NavigationController should exist', function() {
-        expect(!!ctrl).to.equal(true);
+        expect(!!Controller).to.equal(true);
     });
 
     it('should get navItems from NavigationService', function () {
