@@ -34,6 +34,7 @@ var paths = {
         e2e: ['client/**/test/*.e2e.js'],
         views: ['client/**/*.html'],
         modules: [ // Just the module name, ex.: ToDo
+            'Dashboard',
             'ToDo'
         ]
     }
