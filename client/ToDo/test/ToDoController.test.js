@@ -6,17 +6,17 @@ var tds = require('../ToDoService');
 
 describe('ToDoController', function() {
     var scope,
-        ctrl,
+        Controller,
         ToDoService;
 
     beforeEach(function () {
         scope = {};
         ToDoService = new tds();
-        ctrl = new ToDoController[ToDoController.length - 1](scope, ToDoService);
+        Controller = new ToDoController[ToDoController.length - 1](scope, ToDoService);
     });
 
     it('ToDoController should exist', function() {
-        expect(!!ctrl).to.equal(true);
+        expect(!!Controller).to.equal(true);
         expect(scope.todos).to.be.an('array');
     });
 });
