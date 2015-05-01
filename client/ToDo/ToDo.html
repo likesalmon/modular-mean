@@ -9,7 +9,7 @@
 
         <ul class="sidenav-list">
             <li ng-repeat="todo in todos | filter:q as results">
-                <md-button class="md-button" ng-click="select(todo)" ng-class="{ 'md-accent': item.selected }" layout-fill>
+                <md-button class="md-button" ng-click="select(todo)" ng-class="{ 'md-accent': todo.selected }" layout-fill>
                     <h3>{{todo.title}}</h3>
                 </md-button>
                 <md-divider></md-divider>
