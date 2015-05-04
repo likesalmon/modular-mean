@@ -30,18 +30,28 @@ module.exports = function () {
     };
 
     var create = function (todo) {
+        todo.created = moment().format();
+        todo.modified = moment().format();
         todos.push(todo);
+    };
+
+    var update = function (todo) {
+        var currentRecord = _.find(todos, 'id', todo.id);
+        currentRecord.title = todo.title;
+        currentRecord.description = todo.description;
+        currentRecord.modified = moment().format();
     };
 
     var remove = function (id) {
         var index = _.findIndex(todos, 'id', id);
-        todos = todos.splice(index, 1);
+        todos.splice(index, 1);
     };
 
     return {
         all: all,
         one: one,
         create: create,
+        update: update,
         remove: remove
     };
 };
