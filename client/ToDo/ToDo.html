@@ -1,15 +1,19 @@
 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-content role="" flex>
-        <md-input-container layout-padding>
-            <label for="q">Search</label>
-            <input type="text" name="q" ng-model="q" value="">
-        </md-input-container>
+        <div layout="row" layout-padding>
+            <md-button ui-sref="todo.new" class="md-fab">New</md-button>
+
+            <md-input-container layout-padding>
+                <label for="q">Search</label>
+                <input type="text" name="q" ng-model="q" value="">
+            </md-input-container>
+        </div>
 
         <md-divider></md-divider>
 
         <ul class="sidenav-list">
             <li ng-repeat="todo in todos | filter:q as results">
-                <md-button class="md-button" ng-click="select(todo)" ng-class="{ 'md-accent': todo.selected }" layout-fill>
+                <md-button class="md-button" ui-sref="todo.detail({id: todo.id})" ng-class="{ 'md-accent': todo.selected }" layout-fill>
                     <h3>{{todo.title}}</h3>
                 </md-button>
                 <md-divider></md-divider>
@@ -21,10 +25,5 @@
 </md-sidenav>
 
 <md-content layout="column" flex id="content" layout-padding>
-    <div ng-if="!selected"><h3>Please select a todo</h3></div>
-
-    <div ng-if="selected">
-        <h3>{{selected.title}}</h3>
-        <div class="description" ng-bind-html="selected.description | unsafe"></div>
-    </div>
+    <div ui-view><h2>Select a todo or create a <a ui-sref="todo.new">new</a> one.</h2></div>
 </md-content>
