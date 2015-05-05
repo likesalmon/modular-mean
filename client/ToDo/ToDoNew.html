@@ -1,0 +1,15 @@
+<h2>New To Do</h2>
+
+<form name="newTodoForm" ng-submit="save(newTodo)" novalidate>
+    <md-input-container>
+        <label for="title">Title</label>
+        <input type="text" name="title" ng-model="newTodo.title" />
+    </md-input-container>
+
+    <md-input-container>
+        <label for="description">Description</label>
+        <textarea name="description" ng-model="newTodo.description"></textarea>
+    </md-input-container>
+
+    <md-button type="submit" class="md-raised md-primary">Save</md-button>
+</form>
