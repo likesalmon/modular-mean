@@ -26,13 +26,16 @@ module.exports = function () {
     };
 
     var one = function (id) {
-        return _.find(todos, { 'id': id });
+        return _.find(todos, { 'id': parseInt(id) });
     };
 
     var create = function (todo) {
+        todo.id = _.random(0, 9999);
         todo.created = moment().format();
         todo.modified = moment().format();
         todos.push(todo);
+        
+        return todo;
     };
 
     var update = function (todo) {
