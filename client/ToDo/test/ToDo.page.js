@@ -8,11 +8,13 @@ module.exports = function () {
     };
 
     var todoList = element.all(by.repeater('todo in todos'));
-    var search = element(by.model('search'));
+    var search = element(by.model('q'));
+    var newButton = element(by.css('#new-button'));
 
     return {
         get: get,
         todoList: todoList,
-        search: search
+        search: search,
+        newButton: newButton
     };
 };
