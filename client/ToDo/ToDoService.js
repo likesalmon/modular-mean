@@ -6,14 +6,14 @@ var moment = require('moment');
 module.exports = function () {
     var todos = [
         {
-            id: _.random(0, 9999),
+            id: 1,
             title: 'First todo',
             description: 'This is the first thing to do.',
             created: moment().startOf('hour').format(),
             modified: moment().startOf('hour').format()
         },
         {
-            id: _.random(0, 9999),
+            id: 2,
             title: 'Second todo',
             description: 'This is the second thing to do.',
             created: moment().startOf('day').format(),
@@ -34,7 +34,7 @@ module.exports = function () {
         todo.created = moment().format();
         todo.modified = moment().format();
         todos.push(todo);
-        
+
         return todo;
     };
 
