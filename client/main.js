@@ -27,15 +27,15 @@ app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function
             controller: 'ToDoController',
             templateUrl: './ToDo/ToDo.html'
         })
-        .state('todo.detail', {
-            url: '/:id',
-            controller: 'ToDoDetailController',
-            templateUrl: './ToDo/ToDoDetail.html'
-        })
         .state('todo.new', {
             url: '/new',
             controller: 'ToDoNewController',
             templateUrl: './ToDo/ToDoNew.html'
+        })
+        .state('todo.detail', {
+            url: '/:id',
+            controller: 'ToDoDetailController',
+            templateUrl: './ToDo/ToDoDetail.html'
         });
 
         $urlRouterProvider.otherwise('/dashboard');
