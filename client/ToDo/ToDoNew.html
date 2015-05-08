@@ -1,0 +1,23 @@
+<h2 class="title">New To Do</h2>
+
+<form id="newTodoForm" name="newTodoForm" ng-submit="save(newTodo)" novalidate>
+    <md-input-container>
+        <label for="title">Title</label>
+        <input type="text" name="title" ng-model="newTodo.title" ng-minlength="2" required />
+        <ng-messages for="newTodoForm.title.$error">
+            <ng-message when="minlength">Your title is too short.</ng-message>
+            <ng-message when="required">Required</ng-message>
+        </ng-messages>
+    </md-input-container>
+
+    <md-input-container>
+        <label for="description">Description</label>
+        <textarea name="description" ng-model="newTodo.description" ng-minlength="2" ng-maxlength="20"></textarea>
+        <ng-messages for="newTodoForm.description.$error" multiple>
+            <ng-message when="minlength">Your description is too short.</ng-message>
+            <ng-message when="maxlength">Your description is too long.</ng-message>
+        </ng-messages>
+    </md-input-container>
+
+    <md-button id="save-button" type="submit" class="md-raised md-primary" ng-disabled="newTodoForm.$error.required">Save</md-button>
+</form>

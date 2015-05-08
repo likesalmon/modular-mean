@@ -2,12 +2,19 @@
 
 var helper = require('../../helpers/test.helper.js');
 
-function ToDoPage () {
-    this.get = function() {
+module.exports = function () {
+    var get = function() {
         browser.get(helper.rootUrl + '/todo');
     };
 
-    this.foo = element(by.binding('foo'));
-}
+    var todoList = element.all(by.repeater('todo in todos'));
+    var search = element(by.model('q'));
+    var newButton = element(by.css('#new-button'));
 
-module.exports = ToDoPage;
+    return {
+        get: get,
+        todoList: todoList,
+        search: search,
+        newButton: newButton
+    };
+};

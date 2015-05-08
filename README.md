@@ -4,15 +4,27 @@
 
 A boilerplate for MEAN stack projects that uses a modular style to encapsulate related code and tests in the same directories.
 
+
+
 ## Quickstart
 
 In the terminal, do:
 
     git clone git@github.com:likesalmon/modular-mean.git
+    cd modular-mean/
     npm install
-    gulp build
     npm start
-    gulp dev // runs a series of build and test watchers
+
+
+
+## Development Quickstart
+
+    git clone git@github.com:likesalmon/modular-mean.git
+    cd modular-mean/
+    npm install
+    npm start
+    npm run dev
+
 
 ## Goals
 
@@ -76,16 +88,16 @@ It should be very easy to tell what a file is for and what module it belongs to.
         |- my-module.controller.js
         |- my-module.model.js
 
-* Angular script file names should reveal their use in four-letter abbreviations. Convention leans toward SnakeCase (such as "MyModuleCtrl.js") but the dot syntax is working well for now:
+* Angular script file names should reveal their use in four-letter abbreviations. Files should be named using SnakeCase, with a suffix that indicates their use:
 
         MyModule/
-        |- MyModule.ctrl.js
-        |- MyModule.srvc.js
-        |- MyModule.drct.js
+        |- MyModuleController.js
+        |- MyModuleService.js
+        |- MyModuleDirective.js
 
 * Angular views should identify the module they belong to and the name of the route:
 
-        MyModule.myPage.html
+        MyModuleMyPage.html
 
 ## Thanks to these other great projects:
 
@@ -98,5 +110,7 @@ These two blog posts by Ben Lewis of QuickLeft were integral in understanding te
 Then there was this talk by [Ben Clinkinbeard at ng-conf](http://benclinkinbeard.com/talks/2014/ng-conf/#/) that used a more straight-forward syntax.
 
 [This article](https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make) by Mark Meyer introduced me to the concept of modular front-end code. Then [this talk at ng-conf](https://www.youtube.com/watch?v=hG-ARy0oqjI) by John Papa about Angular style sealed the deal. The [angular-seed](https://github.com/angular/angular-seed) project has been an important resource in this regard as well.
+
+Ben Clinkinbeard outlines a dead-simple way of organizing Browserify-ed Angular code in the [slides from his ng-conf talk](http://benclinkinbeard.com/talks/2014/ng-conf/#/). Bastian Krol elaborates on these concepts in [this blog post](https://blog.codecentric.de/en/2014/08/angularjs-browserify/).
 
 This article inspired the [client-side authentication](http://arthur.gonigberg.com/2013/06/29/angularjs-role-based-auth/) I'm using.

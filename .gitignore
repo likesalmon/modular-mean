@@ -7,3 +7,4 @@ node_modules
 public/*
 !public/.gitignore
 npm-debug.log
+.sass-cache

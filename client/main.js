@@ -1,33 +1,48 @@
 'use strict';
 
-require('angular');
-// var _ = require('lodash');
-
+var angular = require('angular');
 var uiRoute = require('angular-ui-router');
-// var foundationApps = require('foundation-apps');
-var app = angular.module('MyApp', [uiRoute]);
+var Navigation = require('./Navigation');
+var Dashboard = require('./Dashboard');
+var ToDo = require('./ToDo');
+
+var app = angular.module('MyApp', [
+    uiRoute,
+    ToDo.name,
+    Dashboard.name,
+    Navigation.name
+]);
 
 app.config(['$locationProvider', '$stateProvider','$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
 
     $stateProvider
         .state('dashboard', {
-            url: '/',
-            controller: require('./Dashboard/dashboard.ctrl.js').inject(app),
-            templateUrl: './Dashboard/dashboard.html'
-        })
-        .state('login', {
-            url: '/login',
-            controller: require('./Login/login.ctrl.js').inject(app),
-            templateUrl: './Login/login.html'
+            url: '/dashboard',
+            controller: 'DashboardController',
+            templateUrl: './Dashboard/Dashboard.html'
         })
         .state('todo', {
             url: '/todo',
-            controller: require('./ToDo/ToDo.ctrl.js').inject(app),
+            controller: 'ToDoController',
             templateUrl: './ToDo/ToDo.html'
+        })
+        .state('todo.new', {
+            url: '/new',
+            controller: 'ToDoNewController',
+            templateUrl: './ToDo/ToDoNew.html'
+        })
+        .state('todo.detail', {
+            url: '/:id',
+            controller: 'ToDoDetailController',
+            templateUrl: './ToDo/ToDoDetail.html'
         });
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/dashboard');
+}]);
+
+app.filter('unsafe', ['$sce', function($sce) {
+    return $sce.trustAsHtml;
 }]);
 
 // app.run(['$state', '$rootScope', function ($state, $rootScope) {
