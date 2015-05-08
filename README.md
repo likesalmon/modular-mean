@@ -95,6 +95,8 @@ These two blog posts by Ben Lewis of QuickLeft were integral in understanding te
 * [Setting Up A JS App With Gulp and Browserify](https://quickleft.com/blog/setting-up-a-clientside-javascript-project-with-gulp-and-browserify/)
 * [AngularJS Unit Testing – For Real, Though](https://quickleft.com/blog/angularjs-unit-testing-for-real-though/)
 
+Then there was this talk by [Ben Clinkinbeard at ng-conf](http://benclinkinbeard.com/talks/2014/ng-conf/#/) that used a more straight-forward syntax.
+
 [This article](https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make) by Mark Meyer introduced me to the concept of modular front-end code. Then [this talk at ng-conf](https://www.youtube.com/watch?v=hG-ARy0oqjI) by John Papa about Angular style sealed the deal. The [angular-seed](https://github.com/angular/angular-seed) project has been an important resource in this regard as well.
 
 This article inspired the [client-side authentication](http://arthur.gonigberg.com/2013/06/29/angularjs-role-based-auth/) I'm using.
