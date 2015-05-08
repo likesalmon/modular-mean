@@ -16,7 +16,6 @@ In the terminal, do:
     npm start
 
 
-
 ## Development Quickstart
 
     git clone git@github.com:likesalmon/modular-mean.git
@@ -24,6 +23,136 @@ In the terminal, do:
     npm install
     npm start
     npm run dev
+
+
+## Detailed Startup Instructions for Centos7
+
+Install the latest Git:
+
+    yum groupinstall "Development Tools"
+    yum install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel
+    # see https://github.com/git/git/releases for the latest source code
+    wget https://github.com/git/git/archive/v2.1.2.tar.gz -O git.tar.gz
+    tar -zxf git.tar.gz
+    cd git-*
+    make configure
+    ./configure --prefix=/usr/local
+    sudo make install
+    git config --global user.name "Your Name"
+    git config --global user.email "you@example.com"
+
+
+Install Curl:
+
+    yum install curl-devel
+
+
+Install Ruby and Compass:
+
+    yum install ruby
+    yum install gcc g++ make automake autoconf curl-devel openssl-devel zlib-devel httpd-devel apr-devel apr-util-devel sqlite-devel
+    yum install ruby-rdoc ruby-devel
+    yum install rubygems
+    gem install json_pure
+    gem install compass
+
+
+Configure firewalld:
+    
+    systemctl start firewalld
+    sudo firewall-cmd --permanent --zone=public --add-service=http 
+    sudo firewall-cmd --permanent --zone=public --add-service=https
+    sudo firewall-cmd --reload
+
+
+Install Nginx:
+
+    yum install epel-release
+    yum install nginx
+    # start Nginx
+    systemctl start nginx.service
+    # configure Nginx to start boot
+    systemctl start nginx.service
+
+
+Configure Nginx:
+
+    # add this line to /etc/nginx/nginx.conf in the http block just below include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+
+    cd /etc/nginx
+    mkdir sites-available sites-enabled
+    cd sites-available
+    vim default
+
+    # paste the following into /etc/nginx/sites-available/default, where example.com and APP_PRIVATE_IP_ADDRESS:port are the IP address or domain name of your server, :port is the port the node app runs on
+
+    server {
+        listen 80;
+
+        server_name example.com;
+
+        location / {
+            proxy_pass http://APP_PRIVATE_IP_ADDRESS:8080;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+    }
+
+    # enable the default site:
+
+    ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+    systemctl restart nginx.service
+
+
+
+
+Create a user:
+
+    useradd -mrU myuser
+
+
+*Note: The following should be run as myuser*
+
+Install NodeJS locally via nvm:
+    
+    # see https://github.com/creationix/nvm for the latest release
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.1/install.sh | bash
+    nvm ls-remote
+    nvm install v0.10.38
+
+
+Install the global dependenices:
+
+    npm install -g express protractor karma-cli browserify gulp
+
+
+And finally, build and start the app:
+
+    git clone git@github.com:likesalmon/modular-mean.git
+    cd modular-mean/
+    npm install
+    npm start
+
+
+Bonus: Systemd Setup
+
+    # create a service file in /etc/systemd/system/myapp.service with the following contents:
+    [Service]
+    ExecStart=[node binary] /home/myuser/[main file]
+    Restart=always
+    StandardOutput=syslog
+    StandardError=syslog
+    SyslogIdentifier=node-sample
+    User=myuser
+    Group=myuser
+    Environment=NODE_ENV=production
+
+    [Install]
+    WantedBy=multi-user.target
 
 
 ## Goals
